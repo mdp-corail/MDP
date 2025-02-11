@@ -2,7 +2,7 @@
 
 Official repo for our My Digital School project ! 📝
 
-Made with 💙 by :   
+Made with 💙 by:   
   
 🔹Esther  
 🔹Béré  
