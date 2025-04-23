@@ -1,13 +1,16 @@
-import { Box, Button, TextField, Typography } from '@mui/material'
+'use client';
+
+import { Box, Button, TextField, Typography, useMediaQuery } from '@mui/material'
 import React from 'react'
 
 /* eslint-disable react/no-unescaped-entities */
 
 
 const Form = () => {
+    const isMobile = useMediaQuery("(max-width: 740px)");
     return (
-        <Box sx={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", p: "40px 60px", gap: "26px", mb: "91px"}}>
-            <Typography variant="h1" sx={{ fontSize: "40px", fontFamily: "SFPRODISPLAYBOLD", fontWeight: "700" }}>Rejoignez-nous !</Typography>
+        <Box sx={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", p: isMobile ? "40px 30px" : "40px 60px", gap: "26px", mb: isMobile ? "41px" : "91px"}}>
+            <Typography variant="h1" sx={{ fontSize: "40px", fontFamily: "SFPRODISPLAYBOLD", fontWeight: "700", textAlign: "center" }}>Rejoignez-nous !</Typography>
             <Typography sx={{ fontSize: "28px", fontFamily: "var(--font-montserrat)", textAlign: "center" }}>
                 <b>Inscrivez-vous</b> dès aujourd’hui et soyez les premiers à <b>construire un réseau</b> professionnel sans frontières.
             </Typography>
@@ -17,7 +20,7 @@ const Form = () => {
                 variant="outlined"
                 size="small"
                 sx={{
-                    width: "583px", height: "48px",
+                    width: isMobile ? "333px" : "583px", height: isMobile ? "40px" : "48px",
                     '& .MuiOutlinedInput-root': {
                         fontFamily: 'var(--font-montserrat-alt)',
                         borderRadius: '14px',
