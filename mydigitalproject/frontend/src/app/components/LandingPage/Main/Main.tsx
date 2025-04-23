@@ -16,7 +16,7 @@ const Main = () => {
                 <Typography variant="h1" sx={{ color: '#086AA6', fontSize: '52px', fontFamily: "var(--font-montserrat)", fontWeight: "800" }}>Échanger.</Typography>
                 <Typography variant="h1" sx={{ color: '#086AA6', fontSize: '52px', fontFamily: "var(--font-montserrat)", fontWeight: "800" }}>Connecter.</Typography>
             </Box>
-            <Box sx={{ width: "100%", p: isMobile ? "40px 30px" : "40px 60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Box sx={{ width: "100%", p: isMobile ? "40px 40px" : "40px 60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Typography sx={{ fontFamily: "SFPRODISPLAY", fontSize: "35px", fontWeight: "bold", textAlign: "center" }}>Avec Meetwork, ouvrez votre horizon professionnel</Typography>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: "118px", padding: isMobile ? "40px 30px" : "40px 60px", mb: isMobile ? "41px" : "91px" }}>
