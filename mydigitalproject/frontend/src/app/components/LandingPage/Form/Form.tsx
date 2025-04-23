@@ -7,7 +7,7 @@ import React from 'react'
 
 
 const Form = () => {
-    const isMobile = useMediaQuery("(max-width: 740px)");
+    const isMobile = useMediaQuery("(max-width: 780px)");
     return (
         <Box sx={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", p: isMobile ? "40px 30px" : "40px 60px", gap: "26px", mb: isMobile ? "41px" : "91px"}}>
             <Typography variant="h1" sx={{ fontSize: "40px", fontFamily: "SFPRODISPLAYBOLD", fontWeight: "700", textAlign: "center" }}>Rejoignez-nous !</Typography>

@@ -11,14 +11,15 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 
 const Footer = () => {
-    const isMobile = useMediaQuery("(max-width: 740px)");
+    const isMobile = useMediaQuery("(max-width: 780px)");
+    const isTablet = useMediaQuery("(max-width: 1200px)");
     return (
-        <Box sx={{ p: isMobile ? "40px 30px" : "40px 60px", height: isMobile ? "fit-content" : "181px", background: "linear-gradient(180deg, #086AA6 0%, #032940 100%)", display: "flex", flexDirection: "column" }}>
-            <Box sx={{ display: "flex", flexDirection: isMobile ? "column" : "row" }}>
-                <Box sx={{ width: isMobile ? "100%" : "25%", mb: isMobile ? "41px" : 0 }}>
+        <Box sx={{ p: isMobile ? "40px 30px" : "40px 60px", height: isTablet ? "fit-content" : "181px", background: "linear-gradient(180deg, #086AA6 0%, #032940 100%)", display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: "flex", flexDirection: isTablet ? "column" : "row" }}>
+                <Box sx={{ width: isTablet ? "100%" : "25%", mb: isTablet ? "41px" : 0 }}>
                     <img src="/assets/images/logo_blanc.png" alt="logo" width={269} height={49} />
                 </Box>
-                <Box sx={{ display: "flex", flexDirection: "column", alignItems: isMobile ? "flex-start" : "center", width: isMobile ? "100%" : "50%" }}>
+                <Box sx={{ display: "flex", flexDirection: "column", alignItems: isTablet ? "flex-start" : "center", width: isTablet ? "100%" : "50%" }}>
                     <Typography sx={{ color: "white", fontSize: "16px", fontFamily: "var(--font-montserrat)", fontWeight: "bold" }}>
                         Suivez-nous sur nos réseaux sociaux
                     </Typography>
@@ -34,7 +35,7 @@ const Footer = () => {
                         </IconButton>
                     </Stack>
                 </Box>
-                <Box sx={{ color: "white", fontFamily: "var(--font-montserrat)", width: isMobile ? "100%" : "25%", display: "flex", flexDirection: "column", alignItems: isMobile ? "flex-start" : "flex-end", mt: isMobile ? "41px" : 0 }}>
+                <Box sx={{ color: "white", fontFamily: "var(--font-montserrat)", width: isTablet ? "100%" : "25%", display: "flex", flexDirection: "column", alignItems: isTablet ? "flex-start" : "flex-end", mt: isTablet ? "41px" : 0 }}>
                     <Box sx={{ width: isMobile ? "100%" : "fit-content" }}>
                         <Button component="a"
                             href="mailto:contact@meetwork.com?subject=Demande d'informations"

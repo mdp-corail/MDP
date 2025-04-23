@@ -8,7 +8,7 @@ import React from "react";
 
 const Header = () => {
 
-    const isMobile = useMediaQuery("(max-width: 740px)");
+    const isMobile = useMediaQuery("(max-width: 780px)");
     return (
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "40px 30px" : "40px 60px" }}>
             {isMobile ? <img src="/assets/images/PICTO_NOIR.png" alt="logo" width={81} height={68} /> :
