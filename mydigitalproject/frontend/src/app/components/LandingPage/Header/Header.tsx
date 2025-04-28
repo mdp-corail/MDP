@@ -3,9 +3,6 @@
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 
-/* eslint-disable react/no-unescaped-entities */
-
-
 const Header = () => {
 
     const isMobile = useMediaQuery("(max-width: 780px)");
@@ -20,7 +17,7 @@ const Header = () => {
                 />
             }
             <Button sx={{ backgroundColor: "#3A3A3A", width: "178px", height: "51px", ml:"auto", borderRadius: "14px", "&:hover": { boxShadow: "inset 0 4px 4px rgba(0, 0, 0, 0.5)" } }}>
-                <Typography sx={{ color: "white", textTransform: "uppercase", fontSize: "25px", fontFamily: "SFPRODISPLAY" }}>s'inscrire</Typography>
+                <Typography sx={{ color: "white", textTransform: "uppercase", fontSize: "25px", fontFamily: "SFPRODISPLAY" }}>s{"'"}inscrire</Typography>
             </Button>
         </Box>
     );

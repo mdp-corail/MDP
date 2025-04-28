@@ -7,9 +7,6 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 
-/* eslint-disable react/no-unescaped-entities */
-
-
 const Footer = () => {
     const isMobile = useMediaQuery("(max-width: 780px)");
     const isTablet = useMediaQuery("(max-width: 1200px)");
