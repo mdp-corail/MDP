@@ -4,27 +4,34 @@ import { Box, Typography, useMediaQuery } from '@mui/material'
 import React from 'react'
 import Form from '../Form/Form'
 
+interface MainProps {
+    formRef: React.RefObject<HTMLDivElement | null>;
+}
 
-const Main = () => {
+
+const Main = ({ formRef }: MainProps) => {
     const isMobile = useMediaQuery("(max-width: 780px)");
     const isTablet = useMediaQuery("(max-width: 1200px)");
     return (
         <Box>
             <Box sx={{ display: "flex", flexDirection: isTablet ? "column" : "row", alignItems: isTablet ? "flex-start" : "center", padding: isMobile ? "40px 30px" : "40px 60px", gap: "30px" }}>
-                <Typography variant="h1" sx={{ color: '#086AA6', fontSize: '52px', fontFamily: "var(--font-montserrat)", fontWeight: "800" }}>Explorer.</Typography>
-                <Typography variant="h1" sx={{ color: '#086AA6', fontSize: '52px', fontFamily: "var(--font-montserrat)", fontWeight: "800" }}>Échanger.</Typography>
-                <Typography variant="h1" sx={{ color: '#086AA6', fontSize: '52px', fontFamily: "var(--font-montserrat)", fontWeight: "800" }}>Connecter.</Typography>
+                {isTablet ? (<Typography variant="h1" sx={{ color: '#086AA6', fontSize: '52px', fontFamily: "var(--font-montserrat)", fontWeight: "800" }}>Explorer.<br></br>Échanger.<br></br>Connecter.</Typography>) : (
+                    <Typography variant="h1" sx={{ color: '#086AA6', fontSize: '52px', fontFamily: "var(--font-montserrat)", fontWeight: "800" }}>Explorer. Échanger. Connecter.</Typography>
+                )}
             </Box>
             <Box sx={{ width: "100%", p: isMobile ? "40px 40px" : "40px 60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Typography sx={{ fontFamily: "SFPRODISPLAY", fontSize: "35px", fontWeight: "bold", textAlign: "center" }}>Avec Meetwork, ouvrez votre horizon professionnel</Typography>
             </Box>
-                <Box sx={{ display: "flex", flexDirection: isTablet ? "column" : "row", alignItems: "center", gap: isTablet ? "59px" : "118px", padding: isMobile ? "40px 30px" : "40px 60px", mb: isTablet ? "41px" : "91px" }}>
-                    <Typography sx={{ fontFamily: "var(--font-montserrat)", fontSize: "20px" }}>
-                        Meetwork est une plateforme pour faire des <b>échanges entre professionnels à l{"'"}étranger</b>. Avec nous, explorez de nouveaux horizons, échangez avec d{"'"}autres experts et trouvez la mission parfaite pour votre bagage professionnel. Rejoignez une <b>communauté internationale</b> de passionnés, de freelances et de professionnels en quête de sens, <b>d{"'"}opportunités et d{"'"}expériences uniques</b>. Chaque rencontre est une porte ouverte sur une nouvelle manière de travailler, d{"'"}apprendre et de collaborer au-delà des frontières.<br></br><br></br>
-                        Les expériences à l{"'"}étranger sont <b>des opportunités à portée de main</b> pour tous. De plus en plus d{"'"}entreprises recherchent des travailleurs étrangers pour leur donner la possibilité d{"'"}apprendre de nouvelles techniques et méthodes de travail.
-                    </Typography>
-                    {isMobile ? null : <img src="/assets/images/illustration1.jpg" alt="illustration dream team" width={595} height={408} />}
-                </Box>
+            <Box sx={{ display: "flex", flexDirection: isTablet ? "column" : "row", alignItems: "center", gap: isTablet ? "59px" : "118px", padding: isMobile ? "40px 30px" : "40px 60px", mb: isTablet ? "41px" : "91px" }}>
+                <Typography sx={{ fontFamily: "var(--font-montserrat)", fontSize: "20px" }}>
+                    Meetwork est une plateforme pour faire des <b>échanges entre professionnels à l{"'"}étranger</b>. Avec nous, explorez de nouveaux horizons, échangez avec d{"'"}autres experts et trouvez la mission parfaite pour votre bagage professionnel. Rejoignez une <b>communauté internationale</b> de passionnés, de freelances et de professionnels en quête de sens, <b>d{"'"}opportunités et d{"'"}expériences uniques</b>. Chaque rencontre est une porte ouverte sur une nouvelle manière de travailler, d{"'"}apprendre et de collaborer au-delà des frontières.<br></br><br></br>
+                    Les expériences à l{"'"}étranger sont <b>des opportunités à portée de main</b> pour tous. De plus en plus d{"'"}entreprises recherchent des travailleurs étrangers pour leur donner la possibilité d{"'"}apprendre de nouvelles techniques et méthodes de travail.
+                </Typography>
+                {isMobile ? null :
+                    <Box>
+                        <img src="/assets/images/illustration1.jpg" alt="Picture of a welcoming team of workers in an office" width={595} height={408} />
+                    </Box>}
+            </Box>
             {/* Box dégradée */}
             {isMobile ? (
                 <>
@@ -65,7 +72,7 @@ const Main = () => {
             ) : (
                 <Box sx={{ p: "40px 60px", height: "325px", background: "linear-gradient(180deg, #086AA6 0%, #06517F 100%)", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", color: "white", gap: "90px", mb: isTablet ? "41px" : "91px" }}>
                     {/* premier bloc */}
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: "591px", p: "20px 40px" }}>
+                    <Box component="blockquote" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: "591px", p: "20px 40px" }}>
                         <Typography sx={{ fontFamily: "var(--font-montserrat)", fontSize: "52px", fontWeight: "bold", mb: "10px" }}>
                             64 %
                         </Typography>
@@ -78,7 +85,7 @@ const Main = () => {
                     </Box>
                     {/* deuxieme bloc */}
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: "591px", p: "20px 40px" }}>
-                        <Box sx={{ display: 'flex', gap: "16px", mb: "10px" }}>
+                        <Box component="blockquote" sx={{ display: 'flex', gap: "16px", mb: "10px" }}>
                             <Typography sx={{ fontFamily: "var(--font-montserrat)", fontSize: "52px", fontWeight: "bold" }}>
                                 5.3
                             </Typography>
@@ -101,7 +108,9 @@ const Main = () => {
             </Box>
             <Box sx={{ display: "flex", flexDirection: isTablet ? "column" : "row", alignItems: "center", gap: isTablet ? "59px" : "118px", padding: isMobile ? "40px 30px" : "40px 60px", mb: isTablet ? "41px" : "91px" }}>
                 {isMobile ? null :
-                    <img src="/assets/images/illustration2.jpg" alt="illustration teamwork" width={595} height={397} />
+                    <Box>
+                        <img src="/assets/images/illustration2.jpg" alt="Picture of a team working together in an office" width={595} height={397} />
+                    </Box>
                 }
                 <Typography sx={{ fontFamily: "var(--font-montserrat)", fontSize: "20px" }}>
                     Meetwork est fait pour les entreprises mais également pour les particuliers.
@@ -127,8 +136,10 @@ const Main = () => {
                     <b>Avec Meetwork, saisissez plus que des opportunités : explorez, échangez, et surtout connectez-vous aux autres !</b>
                 </Typography>
             </Box>
-            <Form />
-        </Box>
+            <div ref={formRef}>
+                <Form />
+            </div>
+        </Box >
     )
 }
 
