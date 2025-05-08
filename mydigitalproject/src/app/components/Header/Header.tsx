@@ -110,8 +110,8 @@ const Header = () => {
                                     onClick={handleMenuOpen}
                                     sx={{ display: 'flex', gap: 1, alignItems: 'center', pr: 0 }}
                                 >
-                                    <LanguageIcon fontSize="medium" />
-                                    <Typography sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <LanguageIcon fontSize="medium" sx={{ color: "primary.main" }} />
+                                    <Typography sx={{ display: 'flex', alignItems: 'center', color: "primary.main" }}>
                                         FR
                                         <ArrowDropDownIcon sx={{ fontSize: '25px !important' }} />
                                     </Typography>

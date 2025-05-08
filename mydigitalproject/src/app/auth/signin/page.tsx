@@ -46,7 +46,7 @@ export default function SignIn() {
                         size="small"
                         required
                         type="email"
-                        sx={{ width: isMobile ? "340px" : "583px" }}
+                        sx={{ width: isMobile ? "340px" : "583px", mb: 2 }}
                     />
                     <Typography>Votre mot de passe</Typography>
                     <TextField

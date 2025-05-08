@@ -113,6 +113,7 @@ const theme = createTheme({
                         fontStyle: 'italic',
                         '& fieldset': {
                             borderColor: '#3A3A3A',
+                            border: "2px solid #3A3A3A",
                         },
                         '&:hover fieldset': {
                             borderColor: '#3A3A3A',
