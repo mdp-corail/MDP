@@ -2,11 +2,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Montserrat_Alternates } from "next/font/google";
 import "./globals.css";
-import Providers from "./api/auth/providers";
-import ThemeRegistry from "./theme/theme-provider";
-import Footer from "./components/Footer/Footer";
-import ContactBlock from "./components/ContactBlock/ContactBlock";
-import Header from "./components/Header/Header";
+
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -34,18 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ThemeRegistry>
         <body className={`${montserrat.variable} ${montserratAlternates.variable}`}>
-          <Header />
           <main className="page-container">
-            <Providers>
               {children}
-            </Providers>
           </main>
-          <ContactBlock />
-          <Footer />
         </body>
-      </ThemeRegistry>
     </html>
   );
 }

@@ -1,6 +1,7 @@
+import LandingPage from "./components/LandingPage/LandingPage";
 
 export default function Page() {
   return (
-    <div>Hello</div>
+    <LandingPage />
   )
 }
