@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Montserrat_Alternates } from "next/font/google";
 import "./globals.css";
+import PiwikInitializer from "./PiwikInitializer";
 
 
 const montserrat = Montserrat({
@@ -30,11 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body className={`${montserrat.variable} ${montserratAlternates.variable}`}>
-          <main className="page-container">
-              {children}
-          </main>
-        </body>
+      <body className={`${montserrat.variable} ${montserratAlternates.variable}`}>
+      <PiwikInitializer />
+        <main className="page-container">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }

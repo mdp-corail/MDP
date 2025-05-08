@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Button, IconButton, Stack, Typography, useMediaQuery } from '@mui/material'
-import FacebookIcon from '@mui/icons-material/Facebook';
+import { FaTiktok } from "react-icons/fa";
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -18,18 +18,18 @@ const Footer = () => {
                     <img src="/assets/images/meetwork-white.png" alt="Logo Meetwork" width={269} height={49} />
                 </Box>
                 {/* Bloc RS */}
-                <Box sx={{ display: "flex", flexDirection: "column", alignItems: isTablet ? "flex-start" : "center", width:"100%"}}>
+                <Box sx={{ display: "flex", flexDirection: "column", alignItems: isTablet ? "flex-start" : "center", width: "100%" }}>
                     <Typography sx={{ color: "white", fontSize: "16px", fontFamily: "var(--font-montserrat)", fontWeight: "bold" }}>
                         Suivez-nous sur nos réseaux sociaux
                     </Typography>
                     <Stack direction="row" gap={3} sx={{ mt: 2 }}>
                         <IconButton onClick={() => window.open("https://www.tiktok.com/@meetwork?is_from_webapp=1&sender_device=pc", "_blank")} disableRipple disableFocusRipple disableTouchRipple sx={{ p: 0 }}>
-                            <FacebookIcon sx={{ color: "white", fontSize: "45px" }} />
+                            <FaTiktok style={{ color: "white", fontSize: "35px" }} />
                         </IconButton>
-                        <IconButton onClick={() => window.open("https://www.instagram.com/_meetwork_/", "_blank")} disableRipple disableFocusRipple disableTouchRipple sx={{ p: 0 }}>
+                        <IconButton onClick={() => window.open("https://www.linkedin.com/in/meetwork-appli-3a93b4363/", "_blank")} disableRipple disableFocusRipple disableTouchRipple sx={{ p: 0 }}>
                             <LinkedInIcon sx={{ color: "white", fontSize: "45px" }} />
                         </IconButton>
-                        <IconButton disableRipple disableFocusRipple disableTouchRipple sx={{ p: 0 }}>
+                        <IconButton onClick={() => window.open("https://www.instagram.com/_meetwork_/", "_blank")} disableRipple disableFocusRipple disableTouchRipple sx={{ p: 0 }}>
                             <InstagramIcon sx={{ color: "white", fontSize: "45px" }} />
                         </IconButton>
                     </Stack>
