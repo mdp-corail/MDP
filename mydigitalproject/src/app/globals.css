@@ -53,3 +53,10 @@ a {
   align-items: center;
   padding: 10rem;
 }
+
+@media screen and (max-width: 780px) {
+  .page-container {
+    padding: 5rem;
+  }
+  
+}

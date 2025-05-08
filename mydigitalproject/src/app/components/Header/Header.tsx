@@ -58,7 +58,7 @@ const Header = () => {
                 position="static"
                 color="transparent"
                 elevation={0}
-                sx={{ p: isMobile ? '40px 10px 0px 10px' : '40px 34px 0px 34px' }}
+                sx={{ p: isMobile ? '40px 15px 0px 15px' : '40px 34px 0px 34px' }}
             >
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
                     {/* Logo */}
@@ -132,7 +132,6 @@ const Header = () => {
                                             <Typography>{label}</Typography>
                                         </MenuItem>
                                     ))}
-
                                 </Menu>
                             </Stack>
                         </Box>
@@ -140,7 +139,7 @@ const Header = () => {
 
                     {/* Mobile Menu Button */}
                     {isMobile && (
-                        <IconButton disableFocusRipple disableTouchRipple disableRipple onClick={() => setDrawerOpen(true)}>
+                        <IconButton disableFocusRipple disableTouchRipple disableRipple onClick={() => setDrawerOpen(true)} sx={{p: 0}}>
                             <MenuIcon fontSize="large" sx={{ color: "primary.main" }} />
                         </IconButton>
                     )}
