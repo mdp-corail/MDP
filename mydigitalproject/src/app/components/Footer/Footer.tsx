@@ -61,9 +61,9 @@ const Footer = () => {
                         ))}
                     </List>
                 </Box>
-                <Box sx={{ display: 'flex', flexDirection: "column", mt: isMobile ? 2 : 0, p: isMobile ? 0 : 1 }}>
+                <Box sx={{ display: 'flex', flexDirection: "column", mt: isMobile ? 2 : 0, p:0}}>
                     <Typography sx={{ fontWeight: "bold", color: "primary.light", py: 1 }}>
-                        S'abonner à notre newsletter
+                        Recevez notre newsletter !
                     </Typography>
                     <TextField
                         fullWidth

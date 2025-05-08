@@ -3,6 +3,8 @@ import { createTheme } from '@mui/material/styles';
 declare module '@mui/material/Button' {
     interface ButtonPropsVariantOverrides {
         alt: true;
+        outline: true;
+        outlineAlt: true;
     }
 }
 
@@ -41,6 +43,32 @@ const theme = createTheme({
                         color: "#f9f9f9",
                     },
                 },
+                {
+                    props: { variant: "outline" },
+                    style: {
+                        backgroundColor: "transparent",
+                        color: "#3A3A3A",
+                        height: "41px",
+                        border: "2px solid #3A3A3A",
+                        borderRadius: "50px",
+                        "&:hover": {
+                            boxShadow: "none",
+                            border: "2px solid #3229D6",
+                            backgroundColor: "#3229D6",
+                            color: "#F9F9F9",
+                        }
+                    },
+                },
+                {
+                    props: { variant: "outlineAlt" },
+                    style: {
+                        backgroundColor: "#3229D6",
+                        color: "#F9F9F9",
+                        border: "2px solid #3229D6",
+                        height: "41px",
+                        borderRadius: "50px",
+                    },
+                },
             ],
             styleOverrides: {
                 root: {
@@ -49,12 +77,28 @@ const theme = createTheme({
                     height: "51px",
                     borderRadius: "14px",
                     boxShadow: "none",
+                    transition: "all 0.2s ease-in-out",
                     "&:hover": {
                         boxShadow: "inset 0 4px 4px rgba(0, 0, 0, 0.5)"
                     }
                 },
 
             },
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    padding: "14px 18px",
+                    fontFamily: 'var(--font-montserrat)',
+                },
+            },
+        },
+        MuiList: {
+            styleOverrides: {
+                root: {
+                    padding: "0px",
+                }
+            }
         },
         MuiTextField: {
             styleOverrides: {

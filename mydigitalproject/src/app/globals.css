@@ -51,6 +51,5 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: 0 10rem;
+  padding: 10rem;
 }

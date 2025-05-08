@@ -14,7 +14,6 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
-    "@next/font": "^14.2.15",
     "bcrypt": "^5.1.1",
     "mongodb": "^6.14.1",
     "mongoose": "^8.12.0",
@@ -22,7 +21,8 @@
     "next-auth": "^4.24.11",
     "nodemailer": "^6.10.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "round-flags": "github:GlobalArtInc/round-flags"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
