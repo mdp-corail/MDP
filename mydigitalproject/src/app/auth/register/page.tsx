@@ -23,7 +23,7 @@ export default function Register() {
     }, []);
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: isMobile ? "left" : "center", px: isMobile ? "30px" : "60px" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: isMobile ? "left" : "center" }}>
             <Typography variant="h1" sx={{ color: '#086AA6', fontFamily: "SFPRODISPLAY", fontSize: '52px', fontWeight: "bold", mb: 8 }}>S'enregistrer</Typography>
             {providers &&
                 Object.values(providers).map((provider: any) => (

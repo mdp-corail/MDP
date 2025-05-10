@@ -26,6 +26,19 @@ const theme = createTheme({
         },
     },
 
+    typography: {
+        h1: {
+            color: '#086AA6', 
+            fontSize: '52px', 
+            fontWeight: "bold"
+        },
+        h2: {
+            color: '#086AA6', 
+            fontSize: '36px', 
+            fontWeight: "bold"
+        },
+    },
+
     components: {
         MuiTypography: {
             styleOverrides: {
