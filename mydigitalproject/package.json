@@ -28,7 +28,9 @@
     "nodemailer": "^6.10.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-slick": "^0.30.3",
     "round-flags": "github:GlobalArtInc/round-flags",
+    "slick-carousel": "^1.8.1",
     "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {
