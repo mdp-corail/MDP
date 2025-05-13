@@ -106,8 +106,8 @@ const Footer = () => {
                 </Box>
             </Box>
             {isMobile &&
-                <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-end", mt: 2 }}>
-                    <IconButton disableRipple disableFocusRipple disableTouchRipple onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} sx={{ width: "fit-content" }}>
+                <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-end", mt: 4 }}>
+                    <IconButton disableRipple disableFocusRipple disableTouchRipple onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} sx={{ width: "fit-content", pb: 0 }}>
                         <ArrowUpwardIcon sx={{ color: "white", fontSize: "25px" }} />
                     </IconButton>
                 </Box>

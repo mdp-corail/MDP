@@ -7,6 +7,7 @@ import ThemeRegistry from "./theme/theme-provider";
 import Footer from "./components/Footer/Footer";
 import ContactBlock from "./components/ContactBlock/ContactBlock";
 import Header from "./components/Header/Header";
+import BackToTopArrow from "./components/BackToTopArrow/BackToTopArrow";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -42,6 +43,7 @@ export default function RootLayout({
               {children}
             </Providers>
           </main>
+          <BackToTopArrow />
           <ContactBlock />
           <Footer />
         </body>
