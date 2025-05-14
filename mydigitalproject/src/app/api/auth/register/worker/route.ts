@@ -29,7 +29,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'User already exists' }, { status: 409 });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 16);
 
         const newUser = await prisma.user.create({
             data: {

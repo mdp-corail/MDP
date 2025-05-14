@@ -23,13 +23,14 @@ import {
     Divider,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import LanguageIcon from '@mui/icons-material/Language';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
 import Link from 'next/link';
 import { languages } from '@/app/data/languages';
+import SearchModal from '../SearchModal/SearchModal';
 
 const navLinks = [
     { label: 'Accueil', href: '/' },
@@ -42,7 +43,8 @@ const Header = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [langAccordionOpen, setLangAccordionOpen] = useState(false);
-
+    const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
+    const [searchOpen, setSearchOpen] = useState(false);
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -50,6 +52,9 @@ const Header = () => {
 
     const handleMenuClose = () => {
         setAnchorEl(null);
+    };
+    const handleSearchOpen = () => {
+        setSearchOpen(true);
     };
 
     return (
@@ -99,7 +104,16 @@ const Header = () => {
                                     </MuiLink>
                                 ))}
                             </Stack>
-                            <Stack direction="row" gap={2} sx={{ alignItems: 'center' }}>
+                            <Stack direction="row" gap={2} sx={{ alignItems: 'center', ml: 8 }}>
+                                <IconButton
+                                    disableFocusRipple
+                                    disableRipple
+                                    disableTouchRipple
+                                    onClick={handleSearchOpen}
+                                    sx={{ display: 'flex', alignItems: 'center', pr: 0 }}
+                                >
+                                    <SearchIcon sx={{ fontSize: '25px !important', color: "primary.main" }} />
+                                </IconButton>
                                 <Button variant="outline" href="/auth/signin">
                                     Connexion
                                 </Button>
@@ -108,13 +122,15 @@ const Header = () => {
                                     disableRipple
                                     disableTouchRipple
                                     onClick={handleMenuOpen}
-                                    sx={{ display: 'flex', gap: 1, alignItems: 'center', pr: 0 }}
+                                    sx={{ display: 'flex', alignItems: 'center', pr: 0 }}
                                 >
-                                    <LanguageIcon fontSize="medium" sx={{ color: "primary.main" }} />
-                                    <Typography sx={{ display: 'flex', alignItems: 'center', color: "primary.main" }}>
-                                        FR
-                                        <ArrowDropDownIcon sx={{ fontSize: '25px !important' }} />
-                                    </Typography>
+                                    <Stack direction={'row'} gap={1}>
+                                        <img src={selectedLanguage.icon} alt={`${selectedLanguage.label} flag`} width={24} height={24} style={{ borderRadius: '50%' }} />
+                                        <Typography sx={{ display: 'flex', alignItems: 'center', color: "primary.main" }}>
+                                            {selectedLanguage.value.toUpperCase()}
+                                            <ArrowDropDownIcon sx={{ fontSize: '25px !important' }} />
+                                        </Typography>
+                                    </Stack>
                                 </IconButton>
                                 <Menu
                                     disableScrollLock
@@ -125,8 +141,11 @@ const Header = () => {
                                     {languages.map(({ label, value, icon }) => (
                                         <MenuItem
                                             key={value}
-                                            onClick={handleMenuClose}
-                                            sx={{ display: 'flex', gap: 1, alignItems: 'center' }}
+                                            onClick={() => {
+                                                setSelectedLanguage({ label, value, icon });
+                                                handleMenuClose();
+                                            }}
+                                            sx={{ display: 'flex', gap: 1, justifyContent: 'left', alignItems: 'center', pl: 2, pr: 4, backgroundColor: selectedLanguage.value === value ? "primary.light" : "transparent" }}
                                         >
                                             <img src={icon} alt={`${label} flag`} width={24} height={24} style={{ borderRadius: '50%' }} />
                                             <Typography>{label}</Typography>
@@ -139,7 +158,7 @@ const Header = () => {
 
                     {/* Mobile Menu Button */}
                     {isMobile && (
-                        <IconButton disableFocusRipple disableTouchRipple disableRipple onClick={() => setDrawerOpen(true)} sx={{p: 0}}>
+                        <IconButton disableFocusRipple disableTouchRipple disableRipple onClick={() => setDrawerOpen(true)} sx={{ p: 0 }}>
                             <MenuIcon fontSize="large" sx={{ color: "primary.main" }} />
                         </IconButton>
                     )}
@@ -165,14 +184,22 @@ const Header = () => {
                         expanded={langAccordionOpen}
                         onChange={() => setLangAccordionOpen(!langAccordionOpen)}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />} >
-                            <Typography>Langue</Typography>
+                            <Stack direction={"row"} gap={1}>
+                                <img src={selectedLanguage.icon} alt={`${selectedLanguage.label} flag`} width={24} height={24} style={{ borderRadius: '50%' }} />
+                                <Typography>
+                                    {selectedLanguage.value.toUpperCase()}
+                                </Typography>
+                            </Stack>
                         </AccordionSummary>
                         <AccordionDetails>
                             {languages.map(({ label, value, icon }) => (
                                 <MenuItem
                                     key={value}
-                                    onClick={() => setLangAccordionOpen(false)}
-                                    sx={{ display: 'flex', gap: 1, alignItems: 'center' }}
+                                    onClick={() => {
+                                        setSelectedLanguage({ label, value, icon });
+                                        setLangAccordionOpen(false);
+                                    }}
+                                    sx={{ display: 'flex', gap: 1, alignItems: 'center', backgroundColor: selectedLanguage.value === value ? "primary.light" : "transparent" }}
                                 >
                                     <img src={icon} alt={`${label} flag`} width={24} height={24} style={{ borderRadius: '50%' }} />
                                     <Typography>{label}</Typography>
@@ -187,6 +214,9 @@ const Header = () => {
                     </Button>
                 </Box>
             </Drawer>
+
+            {/* Search Modal  */}
+            <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
         </>
     );
 };
