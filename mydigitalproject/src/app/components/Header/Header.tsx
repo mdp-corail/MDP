@@ -114,7 +114,7 @@ const Header = () => {
                                 >
                                     <SearchIcon sx={{ fontSize: '25px !important', color: "primary.main" }} />
                                 </IconButton>
-                                <Button variant="outline" href="/auth/signin">
+                                <Button variant="outline" href="/signin">
                                     Connexion
                                 </Button>
                                 <IconButton
@@ -209,7 +209,7 @@ const Header = () => {
                         </AccordionDetails>
                     </Accordion>
                     <Divider />
-                    <Button variant="outlineAlt" href="/auth/signin" onClick={() => setDrawerOpen(false)} sx={{ mt: 4 }}>
+                    <Button variant="outlineAlt" href="/signin" onClick={() => setDrawerOpen(false)} sx={{ mt: 4 }}>
                         Connexion
                     </Button>
                 </Box>

@@ -1,0 +1,150 @@
+'use client';
+
+import {
+    Box,
+    Button,
+    Divider,
+    FormControl,
+    TextField,
+    Typography,
+    useMediaQuery,
+    Snackbar,
+    Alert,
+    Stack,
+} from '@mui/material';
+import { getProviders, signIn } from 'next-auth/react';
+import { JSX, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import GoogleIcon from '@mui/icons-material/Google';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+
+export default function RegisterCompany() {
+    const isMobile = useMediaQuery('(max-width: 780px)');
+    const [providers, setProviders] = useState<any>(null);
+    const router = useRouter();
+
+    const providerIcons: Record<string, (props?: any) => JSX.Element> = {
+        google: (props) => <GoogleIcon {...props} />,
+        linkedin: (props) => <LinkedInIcon {...props} />,
+    };
+
+    const [form, setForm] = useState({
+        name: '',
+        country: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        employeeCount: '',
+    });
+
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async () => {
+        setError('');
+
+        if (form.password !== form.confirmPassword) {
+            setError('Les mots de passe ne correspondent pas.');
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/auth/register/company', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ...form,
+                    employeeCount: Number(form.employeeCount),
+                }),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                router.push('/register/success');
+            } else {
+                setError(data.error || 'Erreur lors de la création du compte.');
+            }
+        } catch (err) {
+            setError('Erreur serveur. Veuillez réessayer.');
+        }
+    };
+
+    useEffect(() => {
+        getProviders().then(setProviders);
+    }, []);
+
+    return (
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: isMobile ? 'left' : 'center' }}>
+            <Stack direction="column" gap={2} sx={{mb: 8}}>
+                <Typography variant="h1" sx={{ color: '#086AA6', fontFamily: 'SFPRODISPLAY', fontSize: '52px', fontWeight: 'bold' }}>
+                    Créer compte entreprise
+                </Typography>
+                <Typography component="a" href="/register/worker" sx={{ textDecoration: 'underline', color: '#086AA6' }}>
+                    Ou cliquez ici si vous êtes un particulier
+                </Typography>
+            </Stack>
+            {providers &&
+                Object.values(providers).map((provider: any) => (
+                    <Button
+                        disableRipple
+                        disableFocusRipple
+                        key={provider.id}
+                        onClick={() => signIn(provider.id)}
+                        startIcon={providerIcons[provider.id]?.({ sx: { fontSize: '32px !important', mr: 4 } })}
+                        sx={{ m: 1, width: '340px' }}
+                    >
+                        Utiliser mon compte {provider.name}
+                    </Button>
+                ))}
+
+            <Divider sx={{ my: 4, width: isMobile ? '100%' : '80%', backgroundColor: 'primary.light' }} />
+
+            <FormControl sx={{ gap: 2, textAlign: 'left' }}>
+                <TextField label="Nom de l'entreprise" name="name" value={form.name} onChange={handleChange} size="small" required />
+                <TextField label="Pays" name="country" value={form.country} onChange={handleChange} size="small" required />
+                <TextField
+                    label="Nombre d'employés"
+                    name="employeeCount"
+                    value={form.employeeCount}
+                    onChange={(e) => {
+                        const onlyNumbers = e.target.value.replace(/\D/g, '');
+                        setForm({ ...form, employeeCount: onlyNumbers });
+                    }}
+                    size="small"
+                    required
+                    inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                />
+                <TextField label="Email" name="email" value={form.email} onChange={handleChange} size="small" required />
+                <TextField label="Mot de passe" name="password" type="password" value={form.password} onChange={handleChange} size="small" required />
+                <TextField label="Confirmer le mot de passe" name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} size="small" required />
+                <Button onClick={handleSubmit} variant="alt" sx={{ width: '340px', alignSelf: 'center', mt: 2 }}>
+                    Valider
+                </Button>
+            </FormControl>
+
+            <Typography sx={{ mt: 4 }}>
+                Déjà inscrit ?{' '}
+                <a href="/signin" style={{ textDecoration: 'underline', color: '#086AA6' }}>
+                    Se connecter
+                </a>
+            </Typography>
+
+            <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')}>
+                <Alert severity="error" onClose={() => setError('')}>
+                    {error}
+                </Alert>
+            </Snackbar>
+
+            <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(false)}>
+                <Alert severity="success" onClose={() => setSuccess(false)}>
+                    Compte entreprise créé avec succès !
+                </Alert>
+            </Snackbar>
+        </Box>
+    );
+}
