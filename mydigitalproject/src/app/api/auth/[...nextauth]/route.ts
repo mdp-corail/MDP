@@ -43,41 +43,21 @@ const handler = NextAuth({
         signIn: '/signin',
     },
     callbacks: {
-        async signIn({ user, account }) {
-            const existingUser = await prisma.user.findUnique({
-                where: { email: user.email! },
-            });
-
-            // If user doesn't exist yet, create it
-            if (!existingUser) {
-                await prisma.user.create({
-                    data: {
-                        email: user.email!,
-                        password: '',
-                        type: 'WORKER',
-                        worker: {
-                            create: {
-                                name: user.name?.split(' ')[0] ?? 'Nom',
-                                surname: user.name?.split(' ')[1] ?? 'Prénom',
-                                country: 'Non spécifié',
-                            },
-                        },
-                    },
-                });
-            }
-
-            return true;
-        },
-
         async session({ session, token }) {
-            const dbUser = await prisma.user.findUnique({
-                where: { email: session.user?.email! },
-                select: { id: true, type: true },
+            if (!session.user?.email) return session;
+
+            const user = await prisma.user.findUnique({
+                where: { email: session.user.email },
+                include: {
+                    worker: true,
+                    company: true,
+                },
             });
 
-            if (dbUser) {
-                session.user.id = dbUser.id;
-                session.user.type = dbUser.type;
+            if (user?.type === 'WORKER' && user.worker) {
+                session.user.name = user.worker.surname;
+            } else if (user?.type === 'COMPANY' && user.company) {
+                session.user.name = user.company.name;
             }
 
             return session;

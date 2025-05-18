@@ -16,13 +16,13 @@ export default function Page() {
       <Box sx={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", alignItems: "center", gap: 8, mb: isMobile ? 10 : 20, width: "100%" }}>
         <Stack gap={4} sx={{ width: isMobile ? "100%" : "80%", maxWidth: "695px" }}>
           <Typography variant="h2" sx={{ fontFamily: "SFPRODISPLAY" }} >
-            Title
+            Avec Meetwork, ouvrez votre horizon professionnel
           </Typography>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac ante ut mauris faucibus posuere. Suspendisse bibendum id tellus id tempor. Mauris euismod finibus velit ut vestibulum. Pellentesque purus metus, dapibus sed diam ac, varius porttitor erat. Cras at magna sit amet magna sollicitudin sodales at in lacus
+            Meetwork est une plateforme pour faire des rencontres professionnels à l’étranger. Avec elle, explorer de nouveaux horizons, échanger avec d’autres professionnels et pourquoi pas trouver l’opportunité professionnelle qui vous manquait au delà des frontières. Rejoignez une communauté internationale de passionnés, de freelances et de professionnels en quête de sens, d’opportunités et d’expériences uniques. Chaque rencontre est une porte ouverte sur une nouvelle manière de travailler, d’apprendre et de collaborer au-delà des frontières.
           </Typography>
           <Button disableRipple disableFocusRipple disableTouchRipple sx={{ width: "231px", alignSelf: "center" }}>
-            CTA BUTTON
+            Nous découvrir
           </Button>
         </Stack>
         <Image alt="" src="/assets/images/placeholder.jpg" width={695} height={657} style={{ objectFit: "contain", width: "100%", height: "100%", maxWidth: "695px" }} />
@@ -32,10 +32,10 @@ export default function Page() {
       <Box sx={{ mb: isMobile ? 10 : 20, width: "100%" }}>
         <Stack gap={4} sx={{ textAlign: "center" }}>
           <Typography variant="h2" sx={{ fontFamily: "SFPRODISPLAY" }}>
-            Lorem ipsum dolor sit amet consectetur
+            Découvrez nos offres
           </Typography>
           <Typography>
-            Lorem ipsum dolor sit amet consectetur
+            Des forfaits adaptés à vos besoins
           </Typography>
         </Stack>
         <Stack direction="row" gap={4} sx={{ mt: 4 }}>
@@ -56,7 +56,7 @@ export default function Page() {
           <DummyCards />
         </Stack>
         <Button disableRipple disableFocusRipple disableTouchRipple sx={{ width: "231px", mt: 4 }}>
-          CTA BUTTON
+          VOIR NOS OFFRES
         </Button>
       </Box>
 

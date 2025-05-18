@@ -22,11 +22,13 @@ import {
     AccordionDetails,
     Divider,
 } from '@mui/material';
+import { useSession } from 'next-auth/react';
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import PersonIcon from '@mui/icons-material/Person';
 import { useState } from 'react';
 import Link from 'next/link';
 import { languages } from '@/app/data/languages';
@@ -45,6 +47,9 @@ const Header = () => {
     const [langAccordionOpen, setLangAccordionOpen] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
     const [searchOpen, setSearchOpen] = useState(false);
+    const { data: session } = useSession();
+    const isLoggedIn = !!session;
+
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -114,8 +119,11 @@ const Header = () => {
                                 >
                                     <SearchIcon sx={{ fontSize: '25px !important', color: "primary.main" }} />
                                 </IconButton>
-                                <Button variant="outline" href="/signin">
-                                    Connexion
+                                <Button variant="outline" href={isLoggedIn ? "/profile" : "/signin"}>
+                                    {isLoggedIn ?
+                                        <Stack direction={'row'} gap={0.5} sx={{ alignItems: 'center', justifyContent: 'left' }}>
+                                            <PersonIcon sx={{ fontSize: '20px !important'}} /> {session?.user?.name}
+                                        </Stack> : 'Connexion'}
                                 </Button>
                                 <IconButton
                                     disableFocusRipple
@@ -209,8 +217,11 @@ const Header = () => {
                         </AccordionDetails>
                     </Accordion>
                     <Divider />
-                    <Button variant="outlineAlt" href="/signin" onClick={() => setDrawerOpen(false)} sx={{ mt: 4 }}>
-                        Connexion
+                    <Button variant="outlineAlt" href={isLoggedIn ? "/profile" : "/signin"} onClick={() => setDrawerOpen(false)} sx={{ mt: 4 }}>
+                        {isLoggedIn ?
+                            <Stack direction={'row'} gap={0.5} sx={{ alignItems: 'center' }}>
+                                <PersonIcon sx={{ fontSize: '20px !important', color: "#F9F9F9" }} /> {session?.user?.name}
+                            </Stack> : 'Connexion'}
                     </Button>
                 </Box>
             </Drawer>

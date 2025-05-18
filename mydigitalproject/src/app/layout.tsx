@@ -8,6 +8,7 @@ import Footer from "./components/Footer/Footer";
 import ContactBlock from "./components/ContactBlock/ContactBlock";
 import Header from "./components/Header/Header";
 import BackToTopArrow from "./components/BackToTopArrow/BackToTopArrow";
+import SessionProviderWrapper from "./components/SessionProviderWrapper";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -35,19 +36,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <ThemeRegistry>
         <body className={`${montserrat.variable} ${montserratAlternates.variable}`}>
-          <Header />
-          <main className="page-container">
-            <Providers>
-              {children}
-            </Providers>
-          </main>
-          <BackToTopArrow />
-          <ContactBlock />
-          <Footer />
+          <SessionProviderWrapper>
+            <Header />
+            <main className="page-container">
+              <Providers>
+                {children}
+              </Providers>
+            </main>
+            <BackToTopArrow />
+            <ContactBlock />
+            <Footer />
+          </SessionProviderWrapper>
         </body>
       </ThemeRegistry>
+
     </html>
   );
 }
