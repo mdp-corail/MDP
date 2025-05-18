@@ -21,7 +21,7 @@ export default function RegisterSuccess() {
             <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
                 Compte créé avec succès !
             </Typography>
-            <Typography>Vous allez recevoir un email de confirmation. Pensez à regarder dans vos spams !</Typography>
+            <Typography>Redirection vers votre page de profil</Typography>
             <CircularProgress color="primary" />
         </Box>
     );

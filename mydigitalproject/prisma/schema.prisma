@@ -31,7 +31,9 @@ model WorkerProfile {
   resumeFile  String?
   xp          Int     @default(0)
   level       Int     @default(1)
-
+  isActive    Boolean @default(false)
+  token       String?
+  
   userId String @unique
   user   User   @relation("UserToWorker", fields: [userId], references: [id])
 }
@@ -45,6 +47,8 @@ model CompanyProfile {
   employeeCount   Int
   website         String?
   expertiseFields String[]
+  isActive        Boolean @default(false)
+  token           String?
 
   userId String @unique
   user   User   @relation("UserToCompany", fields: [userId], references: [id])

@@ -114,7 +114,7 @@ export default function Register() {
             </FormControl>
 
             <Typography sx={{ mt: 4 }}>
-                Déjà utilisateur ?{' '}
+                Déjà inscrit.e ?{' '}
                 <a href="/signin" style={{ textDecoration: 'underline', color: '#086AA6' }}>
                     Se connecter
                 </a>

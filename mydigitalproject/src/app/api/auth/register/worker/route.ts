@@ -1,6 +1,8 @@
 import { prisma } from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
+import { randomBytes } from "crypto";
+import { sendVerificationEmail } from "@/app/lib/mailer";
 
 export async function POST(req: Request) {
     try {
@@ -19,6 +21,8 @@ export async function POST(req: Request) {
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
+        const token = randomBytes(32).toString('hex');
+
         // Step 1: Create the User
         const newUser = await prisma.user.create({
             data: {
@@ -35,8 +39,11 @@ export async function POST(req: Request) {
                 surname,
                 country,
                 userId: newUser.id,
+                token
             },
         });
+
+        await sendVerificationEmail(email, token);
 
         return NextResponse.json({ message: 'User created', userId: newUser.id }, { status: 201 });
 
