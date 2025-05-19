@@ -49,7 +49,7 @@ export default function Page() {
       <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", mb: isMobile ? 10 : 20 }}>
         <Stack gap={4} sx={{ textAlign: "center" }}>
           <Typography variant="h2" sx={{ fontFamily: "SFPRODISPLAY" }}>
-            Lorem ipsum dolor sit amet consectetur
+            Découvrez nos offres
           </Typography>
         </Stack>
         <Stack direction="row" gap={4} sx={{ flexWrap: "wrap", justifyContent: "center", mt: 4 }}>
