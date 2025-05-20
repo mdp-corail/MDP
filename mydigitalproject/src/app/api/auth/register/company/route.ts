@@ -2,7 +2,6 @@ import { prisma } from '@/app/lib/prisma';
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import { randomBytes } from 'crypto';
-import { sendVerificationEmail } from '@/app/lib/mailer';
 
 export async function POST(req: Request) {
     try {
@@ -38,9 +37,7 @@ export async function POST(req: Request) {
                 token,
             },
         });
-
-        await sendVerificationEmail(email, token);
-
+        
         return NextResponse.json({ message: 'Company account created. Please check your email.' }, { status: 201 });
     } catch (err: any) {
         console.error('❌ Company registration error:', err);
