@@ -5,6 +5,8 @@ declare module '@mui/material/Button' {
         alt: true;
         outline: true;
         outlineAlt: true;
+        outlineAltReverse: true;
+        danger: true;
     }
 }
 
@@ -63,7 +65,7 @@ const theme = createTheme({
                         color: "#3A3A3A",
                         height: "41px",
                         border: "2px solid #3A3A3A",
-                        borderRadius: "50px",
+                        borderRadius: "14px",
                         "&:hover": {
                             boxShadow: "none",
                             border: "2px solid #3229D6",
@@ -79,7 +81,27 @@ const theme = createTheme({
                         color: "#F9F9F9",
                         border: "2px solid #3229D6",
                         height: "41px",
-                        borderRadius: "50px",
+                        borderRadius: "14px",
+                    },
+                },
+                {
+                    props: { variant: "outlineAltReverse" },
+                    style: {
+                        backgroundColor: "#F9F9F9",
+                        color: "#3229D6",
+                        border: "2px solid #F9F9F9",
+                        height: "41px",
+                        borderRadius: "14px",
+                    },
+                },
+                {
+                    props: { variant: "danger" },
+                    style: {
+                        backgroundColor: "#c61414",
+                        color: "#F9F9F9",
+                        border: "2px solid #c61414",
+                        height: "41px",
+                        borderRadius: "14px",
                     },
                 },
             ],

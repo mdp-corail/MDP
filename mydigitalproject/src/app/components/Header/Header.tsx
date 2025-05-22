@@ -17,15 +17,10 @@ import {
     ListItem,
     ListItemButton,
     ListItemText,
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
-    Divider,
 } from '@mui/material';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import PersonIcon from '@mui/icons-material/Person';
@@ -36,15 +31,16 @@ import SearchModal from '../SearchModal/SearchModal';
 
 const navLinks = [
     { label: 'Accueil', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Nos Offres', href: '/offers' },
+    { label: 'Annonces', href: '/announces' },
+    { label: 'À propos', href: '/about' },
+    { label: 'Accessibilité', href: '/accessibility' },
 ];
 
 const Header = () => {
     const isMobile = useMediaQuery('(max-width: 780px)');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [langAccordionOpen, setLangAccordionOpen] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
     const [searchOpen, setSearchOpen] = useState(false);
     const { data: session } = useSession();
@@ -121,10 +117,19 @@ const Header = () => {
                                 </IconButton>
                                 <Button variant="outline" href={isLoggedIn ? "/profile" : "/signin"}>
                                     {isLoggedIn ?
-                                        <Stack direction={'row'} gap={0.5} sx={{ alignItems: 'center', justifyContent: 'left' }}>
+                                        <Stack direction={'row'} gap={0.5} sx={{ alignItems: 'center' }}>
                                             <PersonIcon sx={{ fontSize: '20px !important'}} /> {session?.user?.name}
-                                        </Stack> : 'Connexion'}
+                                        </Stack>
+                                        : 'Connexion'
+                                    }
                                 </Button>
+                                {isLoggedIn ?
+                                    <Button variant="danger" onClick={() => signOut()}>Déconnexion
+                                    </Button>
+                                    :
+                                    <Button variant="outlineAlt">S'inscrire
+                                    </Button>
+                                }
                                 <IconButton
                                     disableFocusRipple
                                     disableRipple
@@ -175,54 +180,85 @@ const Header = () => {
 
             {/* Mobile Drawer */}
             <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', width: 250, p: "40px 30px" }}>
-                    <CloseIcon onClick={() => setDrawerOpen(false)} sx={{ cursor: 'pointer', color: "primary.main", alignSelf: "flex-end", p: "8px", fontSize: "51px" }} />
-                    <List>
-                        {navLinks.map((link) => (
-                            <ListItem key={link.label} disablePadding>
-                                <ListItemButton component={Link} href={link.href} onClick={() => setDrawerOpen(false)}>
-                                    <ListItemText primary={link.label} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List>
-                    <Divider sx={{ mt: 3 }} />
-                    <Accordion
-                        elevation={0}
-                        expanded={langAccordionOpen}
-                        onChange={() => setLangAccordionOpen(!langAccordionOpen)}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />} >
-                            <Stack direction={"row"} gap={1}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', width: "100vw", height: "100vh", background: "linear-gradient(180deg, #086AA6 0%, #032940 100%)", p: "40px 30px", color: "primary.light" }}>
+
+                    {/* Languages  */}
+                    <Stack direction="row" gap={"2"} justifyContent={"space-between"}>
+                        <IconButton
+                            disableFocusRipple
+                            disableRipple
+                            disableTouchRipple
+                            onClick={handleMenuOpen}
+                            sx={{ display: 'flex', pr: 0 }}
+                        >
+                            <Stack direction={'row'} gap={1}>
                                 <img src={selectedLanguage.icon} alt={`${selectedLanguage.label} flag`} width={24} height={24} style={{ borderRadius: '50%' }} />
-                                <Typography>
+                                <Typography sx={{ display: 'flex', alignItems: 'center', color: "primary.light" }}>
                                     {selectedLanguage.value.toUpperCase()}
+                                    <ArrowDropDownIcon sx={{ fontSize: '25px !important' }} />
                                 </Typography>
                             </Stack>
-                        </AccordionSummary>
-                        <AccordionDetails>
+                        </IconButton>
+                        <Menu
+                            disableScrollLock
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={handleMenuClose}
+                        >
                             {languages.map(({ label, value, icon }) => (
                                 <MenuItem
                                     key={value}
                                     onClick={() => {
                                         setSelectedLanguage({ label, value, icon });
-                                        setLangAccordionOpen(false);
+                                        handleMenuClose();
                                     }}
-                                    sx={{ display: 'flex', gap: 1, alignItems: 'center', backgroundColor: selectedLanguage.value === value ? "primary.light" : "transparent" }}
+                                    sx={{ display: 'flex', gap: 1, justifyContent: 'left', alignItems: 'center', pl: 2, pr: 4, backgroundColor: selectedLanguage.value === value ? "primary.light" : "transparent" }}
                                 >
                                     <img src={icon} alt={`${label} flag`} width={24} height={24} style={{ borderRadius: '50%' }} />
                                     <Typography>{label}</Typography>
                                 </MenuItem>
                             ))}
+                        </Menu>
 
-                        </AccordionDetails>
-                    </Accordion>
-                    <Divider />
-                    <Button variant="outlineAlt" href={isLoggedIn ? "/profile" : "/signin"} onClick={() => setDrawerOpen(false)} sx={{ mt: 4 }}>
+                        <CloseIcon onClick={() => setDrawerOpen(false)} sx={{ cursor: 'pointer', color: "primary.light", alignSelf: "flex-end", p: "8px", fontSize: "51px" }} />
+                    </Stack>
+
+                    {/* Main block */}
+                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: 'center', mt: 8, justifyContent: 'center' }}>
+                        <img
+                            src={'/assets/images/meetwork-white.png'
+                            }
+                            alt="Logo Meetwork"
+                            width={280}
+                            style={{ color: "primary.light" }}
+                        />
+
+                        {/* Links list */}
+                        <List sx={{ width: "100%", p: 4 }}>
+                            {navLinks.map((link) => (
+                                <ListItem key={link.label} disablePadding sx={{ width: "100%" }}>
+                                    <ListItemButton component={Link} href={link.href} onClick={() => setDrawerOpen(false)} sx={{ textAlign: "center", p: 2 }}>
+                                        <ListItemText primary={link.label} />
+                                    </ListItemButton>
+                                </ListItem>
+                            ))}
+                        </List>
+                        <Button variant="outlineAlt" href={isLoggedIn ? "/profile" : "/signin"} onClick={() => setDrawerOpen(false)} sx={{ mt: 4, width: "185px" }}>
+                            {isLoggedIn ?
+                                <Stack direction={'row'} gap={0.5} sx={{ alignItems: 'center' }}>
+                                    <PersonIcon sx={{ fontSize: '20px !important', color: "#F9F9F9" }} /> {session?.user?.name}
+                                </Stack>
+                                : 'Connexion'
+                            }
+                        </Button>
                         {isLoggedIn ?
-                            <Stack direction={'row'} gap={0.5} sx={{ alignItems: 'center' }}>
-                                <PersonIcon sx={{ fontSize: '20px !important', color: "#F9F9F9" }} /> {session?.user?.name}
-                            </Stack> : 'Connexion'}
-                    </Button>
+                            <Button variant="danger" onClick={() => signOut()} sx={{ mt: 4, width: "185px" }}>Déconnexion
+                            </Button>
+                            :
+                            <Button variant="outlineAltReverse" onClick={() => setDrawerOpen(false)} sx={{ mt: 4, width: "185px" }}>S'inscrire
+                            </Button>
+                        }
+                    </Box>
                 </Box>
             </Drawer>
 

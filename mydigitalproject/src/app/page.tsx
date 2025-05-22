@@ -3,8 +3,6 @@
 import { Box, Button, IconButton, Stack, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import DummyCards from "./components/DummyCards/DummyCards";
-import { Carousel } from "@/components/ui/carousel";
-
 
 
 export default function Page() {
