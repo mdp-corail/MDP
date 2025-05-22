@@ -79,7 +79,6 @@ const theme = createTheme({
                     style: {
                         backgroundColor: "#3229D6",
                         color: "#F9F9F9",
-                        border: "2px solid #3229D6",
                         height: "41px",
                         borderRadius: "14px",
                     },
@@ -89,7 +88,6 @@ const theme = createTheme({
                     style: {
                         backgroundColor: "#F9F9F9",
                         color: "#3229D6",
-                        border: "2px solid #F9F9F9",
                         height: "41px",
                         borderRadius: "14px",
                     },

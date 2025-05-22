@@ -40,6 +40,7 @@ const navLinks = [
 const Header = () => {
     const isMobile = useMediaQuery('(max-width: 780px)');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [registerAnchorEl, setRegisterAnchorEl] = useState<null | HTMLElement>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
     const [searchOpen, setSearchOpen] = useState(false);
@@ -54,6 +55,15 @@ const Header = () => {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+
+    const handleRegisterMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setRegisterAnchorEl(event.currentTarget);
+    };
+
+    const handleRegisterMenuClose = () => {
+        setRegisterAnchorEl(null);
+    };
+
     const handleSearchOpen = () => {
         setSearchOpen(true);
     };
@@ -118,7 +128,7 @@ const Header = () => {
                                 <Button variant="outline" href={isLoggedIn ? "/profile" : "/signin"}>
                                     {isLoggedIn ?
                                         <Stack direction={'row'} gap={0.5} sx={{ alignItems: 'center' }}>
-                                            <PersonIcon sx={{ fontSize: '20px !important'}} /> {session?.user?.name}
+                                            <PersonIcon sx={{ fontSize: '20px !important' }} /> {session?.user?.name}
                                         </Stack>
                                         : 'Connexion'
                                     }
@@ -127,9 +137,24 @@ const Header = () => {
                                     <Button variant="danger" onClick={() => signOut()}>Déconnexion
                                     </Button>
                                     :
-                                    <Button variant="outlineAlt">S'inscrire
+                                    <Button variant="outlineAlt" onClick={handleRegisterMenuOpen} endIcon={<ArrowDropDownIcon />}>S'inscrire
                                     </Button>
                                 }
+                                <Menu
+                                    disableScrollLock
+                                    anchorEl={registerAnchorEl}
+                                    open={Boolean(registerAnchorEl)}
+                                    onClose={handleRegisterMenuClose}
+                                >
+                                    <MenuItem
+                                        onClick={() => { handleRegisterMenuClose(); }}>
+                                        <Link href="/register/worker">Particulier</Link>
+                                    </MenuItem>
+                                    <MenuItem
+                                        onClick={() => { handleRegisterMenuClose(); }}>
+                                        <Link href="/register/company">Entreprise</Link>
+                                    </MenuItem>
+                                </Menu>
                                 <IconButton
                                     disableFocusRipple
                                     disableRipple
@@ -255,7 +280,7 @@ const Header = () => {
                             <Button variant="danger" onClick={() => signOut()} sx={{ mt: 4, width: "185px" }}>Déconnexion
                             </Button>
                             :
-                            <Button variant="outlineAltReverse" onClick={() => setDrawerOpen(false)} sx={{ mt: 4, width: "185px" }}>S'inscrire
+                            <Button variant="outlineAltReverse" onClick={() => setDrawerOpen(false)} href="/register" sx={{ mt: 4, width: "185px" }}>S'inscrire
                             </Button>
                         }
                     </Box>

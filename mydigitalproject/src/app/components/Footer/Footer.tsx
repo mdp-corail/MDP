@@ -102,7 +102,7 @@ const Footer = () => {
                             },
                         }}
                     />
-                    <Button disableRipple disableFocusRipple disableTouchRipple variant="alt" sx={{ mt: 2, width: "333px" }}>S'abonner</Button>
+                    <Button disableRipple disableFocusRipple disableTouchRipple sx={{ mt: 2, width: "333px" }}>S'abonner</Button>
                 </Box>
             </Box>
             {isMobile &&
