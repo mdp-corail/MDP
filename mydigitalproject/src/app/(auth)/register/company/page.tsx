@@ -12,18 +12,20 @@ import {
     Alert,
     Stack,
 } from '@mui/material';
-import { getProviders, signIn } from 'next-auth/react';
+import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react';
 import { JSX, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { SvgIconProps } from '@mui/material';
+
 
 export default function RegisterCompany() {
     const isMobile = useMediaQuery('(max-width: 780px)');
-    const [providers, setProviders] = useState<any>(null);
+    const [providers, setProviders] = useState<Record<LiteralUnion<string, string>, ClientSafeProvider> | null>(null);
     const router = useRouter();
 
-    const providerIcons: Record<string, (props?: any) => JSX.Element> = {
+    const providerIcons: Record<string, (props: SvgIconProps) => JSX.Element> = {
         google: (props) => <GoogleIcon {...props} />,
         linkedin: (props) => <LinkedInIcon {...props} />,
     };
@@ -69,7 +71,7 @@ export default function RegisterCompany() {
             } else {
                 setError(data.error || 'Erreur lors de la création du compte.');
             }
-        } catch (err) {
+        } catch {
             setError('Erreur serveur. Veuillez réessayer.');
         }
     };
@@ -80,7 +82,7 @@ export default function RegisterCompany() {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: isMobile ? 'left' : 'center' }}>
-            <Stack direction="column" gap={2} sx={{mb: 8}}>
+            <Stack direction="column" gap={2} sx={{ mb: 8 }}>
                 <Typography variant="h1" sx={{ color: '#086AA6', fontFamily: 'SFPRODISPLAY', fontSize: '52px', fontWeight: 'bold' }}>
                     Créer compte entreprise
                 </Typography>
@@ -89,7 +91,7 @@ export default function RegisterCompany() {
                 </Typography>
             </Stack>
             {providers &&
-                Object.values(providers).map((provider: any) => (
+                Object.values(providers).map((provider) => (
                     <Button
                         disableRipple
                         disableFocusRipple
@@ -108,7 +110,7 @@ export default function RegisterCompany() {
                 <TextField label="Nom de l'entreprise" name="name" value={form.name} onChange={handleChange} size="small" required />
                 <TextField label="Pays" name="country" value={form.country} onChange={handleChange} size="small" required />
                 <TextField
-                    label="Nombre d'employés"
+                    label="Nombre de salariés"
                     name="employeeCount"
                     value={form.employeeCount}
                     onChange={(e) => {

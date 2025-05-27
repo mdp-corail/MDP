@@ -39,7 +39,7 @@ export async function POST(req: Request) {
         });
         
         return NextResponse.json({ message: 'Company account created. Please check your email.' }, { status: 201 });
-    } catch (err: any) {
+    } catch (err) {
         console.error('❌ Company registration error:', err);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }

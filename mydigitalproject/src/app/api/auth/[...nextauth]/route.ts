@@ -43,7 +43,7 @@ const handler = NextAuth({
         signIn: '/signin',
     },
     callbacks: {
-        async session({ session, token }) {
+        async session({ session }) {
             if (!session.user?.email) return session;
 
             const user = await prisma.user.findUnique({

@@ -1,7 +1,8 @@
+
 import { Box, Card, IconButton, InputAdornment, Modal, Stack, TextField, useMediaQuery, Slide, Fade } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 interface SearchModalProps {
     open: boolean
@@ -17,8 +18,6 @@ const SearchModal = ({ open, onClose }: SearchModalProps) => {
             inputRef.current.focus();
         }
     };
-
-
 
     return (
         <Modal

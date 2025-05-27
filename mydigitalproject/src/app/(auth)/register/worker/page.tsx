@@ -12,18 +12,19 @@ import {
     Snackbar,
     Alert,
 } from '@mui/material';
-import { getProviders, signIn } from 'next-auth/react';
+import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react';
 import { JSX, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { SvgIconProps } from '@mui/material';
 
 export default function Register() {
     const isMobile = useMediaQuery('(max-width: 780px)');
-    const [providers, setProviders] = useState<any>(null);
+    const [providers, setProviders] = useState<Record<LiteralUnion<string, string>, ClientSafeProvider> | null>(null);
     const router = useRouter();
 
-    const providerIcons: Record<string, (props?: any) => JSX.Element> = {
+    const providerIcons: Record<string, (props: SvgIconProps) => JSX.Element> = {
         google: (props) => <GoogleIcon {...props} />,
         linkedin: (props) => <LinkedInIcon {...props} />,
     };
@@ -65,7 +66,7 @@ export default function Register() {
                 const data = await res.json();
                 setError(data.error || 'Erreur lors de la création du compte.');
             }
-        } catch (err) {
+        } catch {
             setError('Erreur serveur. Veuillez réessayer.');
         }
     };
@@ -86,7 +87,7 @@ export default function Register() {
             </Stack>
 
             {providers &&
-                Object.values(providers).map((provider: any) => (
+                Object.values(providers).map((provider) => (
                     <Button
                         disableRipple
                         disableFocusRipple

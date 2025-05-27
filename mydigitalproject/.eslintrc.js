@@ -1,10 +1,7 @@
 module.exports = {
-    extends: [
-        'next/core-web-vitals',
-        'plugin:prettier/recommended', // ⬅️ ADD THIS LINE
-    ],
-    plugins: ['prettier'], // ⬅️ ADD THIS LINE (if not present)
+    plugins: ['react'],
+    extends: ['plugin:react/recommended', 'next', 'next/core-web-vitals'],
     rules: {
-        // Your custom ESLint rules
+        'react/no-unescaped-entities': 'off',
     },
 };

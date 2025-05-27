@@ -1,3 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
+
+
 "use client";
 
 import { Box, Button, IconButton, List, ListItem, Stack, TextField, Typography, useMediaQuery } from '@mui/material'
@@ -38,8 +41,8 @@ const Footer = () => {
                 </Box>
             </Box>
             {/* Bloc 2 */}
-            <Box sx={{display: 'flex', flexDirection: isMobile ? "column" : "row", width: isTablet ? "100%" : "75%", justifyContent:'flex-end', gap: isTablet ? 2 : 12, mt: isTablet ? 2 : 0 }}>
-                <Box sx={{ display: 'flex', flexDirection: isMobile ? "column" : "row", width: isTablet ? "100%" : "50%", gap: isTablet ? 4 : 12, px: isTablet ? 0 : 2, justifyContent: isTablet ? "flex-start" : "flex-end"  }}>
+            <Box sx={{ display: 'flex', flexDirection: isMobile ? "column" : "row", width: isTablet ? "100%" : "75%", justifyContent: 'flex-end', gap: isTablet ? 2 : 12, mt: isTablet ? 2 : 0 }}>
+                <Box sx={{ display: 'flex', flexDirection: isMobile ? "column" : "row", width: isTablet ? "100%" : "50%", gap: isTablet ? 4 : 12, px: isTablet ? 0 : 2, justifyContent: isTablet ? "flex-start" : "flex-end" }}>
                     <List>
                         <Typography sx={{ fontWeight: "bold", color: "primary.light", py: 1 }}>
                             Informations
@@ -61,7 +64,7 @@ const Footer = () => {
                         ))}
                     </List>
                 </Box>
-                <Box sx={{ display: 'flex', flexDirection: "column", mt: isMobile ? 2 : 0, p:0}}>
+                <Box sx={{ display: 'flex', flexDirection: "column", mt: isMobile ? 2 : 0, p: 0 }}>
                     <Typography sx={{ fontWeight: "bold", color: "primary.light", py: 1 }}>
                         Recevez notre newsletter !
                     </Typography>

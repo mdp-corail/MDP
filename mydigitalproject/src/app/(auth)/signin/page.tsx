@@ -1,21 +1,23 @@
+/* eslint-disable react/no-unescaped-entities */
+
 'use client';
 
-import { Box, Button, Checkbox, Divider, FormControl, Stack, TextField, Typography, useMediaQuery } from '@mui/material';
-import { getProviders, signIn } from 'next-auth/react';
+import { Box, Button, Checkbox, Divider, FormControl, Stack, SvgIconProps, TextField, Typography, useMediaQuery } from '@mui/material';
+import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react';
 import { JSX, useEffect, useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { CheckBox } from '@mui/icons-material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import ContactBlock from '@/app/components/ContactBlock/ContactBlock';
 
 
 export default function SignIn() {
     const isMobile = useMediaQuery("(max-width: 780px)");
-    const [providers, setProviders] = useState<any>(null);
+    const [providers, setProviders] = useState<Record<LiteralUnion<string, string>, ClientSafeProvider> | null>(null);
     const [form, setForm] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
-    const providerIcons: Record<string, (props?: any) => JSX.Element> = {
+
+    const providerIcons: Record<string, (props: SvgIconProps) => JSX.Element> = {
         google: (props) => <GoogleIcon {...props} />,
         linkedin: (props) => <LinkedInIcon {...props} />,
     };
@@ -43,13 +45,13 @@ export default function SignIn() {
 
     useEffect(() => {
         getProviders().then(setProviders);
-    }, []);
+    }, [error]);
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: isMobile ? "left" : "center" }}>
             <Typography variant="h1" sx={{ color: '#086AA6', fontFamily: "SFPRODISPLAY", fontSize: '52px', fontWeight: "bold", mb: 8 }}>Se connecter ou s'enregistrer</Typography>
             {providers &&
-                Object.values(providers).map((provider: any) => (
+                Object.values(providers).map((provider) => (
                     <Button
                         disableRipple
                         disableFocusRipple
@@ -96,8 +98,8 @@ export default function SignIn() {
                 <Button
                     disableRipple
                     disableFocusRipple
-                    variant="alt" 
-                    onClick={handleSubmit} 
+                    variant="alt"
+                    onClick={handleSubmit}
                     sx={{ width: "340px", alignSelf: "center", mt: 2 }}>Valider</Button>
             </FormControl>
             <Typography sx={{ mt: 4 }}>

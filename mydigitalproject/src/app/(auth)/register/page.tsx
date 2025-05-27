@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Typography, Stack, useMediaQuery, ListItemButton } from '@mui/material';
+import { Box, Typography, Stack, useMediaQuery, ListItemButton } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import EastIcon from '@mui/icons-material/East';
 
