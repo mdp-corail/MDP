@@ -24,7 +24,9 @@
 
 //     useEffect(() => {
 //         if (session?.user) {
-//             fetch(`/api/profile/worker`)
+//             fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/worker`, {
+//                 method: 'GET',
+//             })
 //                 .then((res) => res.json())
 //                 .then((data) => {
 //                     setProfile(data);
@@ -41,7 +43,7 @@
 //         if (image) formData.append('picture', image);
 //         if (cv) formData.append('resume', cv);
 
-//         await fetch('/api/profile/worker', {
+//         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/worker`, {
 //             method: 'POST',
 //             body: formData,
 //         });

@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Montserrat_Alternates } from "next/font/google";
 import "./globals.css";
-import Providers from "../../../backend/api/auth/providers";
 import ThemeRegistry from "./theme/theme-provider";
 import Footer from "./components/Footer/Footer";
 import ContactBlock from "./components/ContactBlock/ContactBlock";
@@ -42,9 +41,7 @@ export default function RootLayout({
           <SessionProviderWrapper>
             <Header />
             <main className="page-container">
-              <Providers>
                 {children}
-              </Providers>
             </main>
             <BackToTopArrow />
             <ContactBlock />

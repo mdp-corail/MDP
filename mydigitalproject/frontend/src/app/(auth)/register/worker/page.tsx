@@ -19,6 +19,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { SvgIconProps } from '@mui/material';
 
+
 export default function Register() {
     const isMobile = useMediaQuery('(max-width: 780px)');
     const [providers, setProviders] = useState<Record<LiteralUnion<string, string>, ClientSafeProvider> | null>(null);
@@ -54,9 +55,9 @@ export default function Register() {
         }
 
         try {
-            const res = await fetch('/api/auth/register/worker', {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/register/worker`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form),
             });
 
