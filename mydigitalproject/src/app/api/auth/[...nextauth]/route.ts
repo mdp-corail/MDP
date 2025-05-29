@@ -2,7 +2,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import LinkedInProvider from 'next-auth/providers/linkedin';
-import { prisma } from '../../../lib/prisma';
+import { prisma } from '@/app/lib/prisma';
 import bcrypt from 'bcrypt';
 
 const handler = NextAuth({
@@ -43,7 +43,7 @@ const handler = NextAuth({
         signIn: '/signin',
     },
     callbacks: {
-        async session({ session }) {
+        async session({ session, token }) {
             if (!session.user?.email) return session;
 
             const user = await prisma.user.findUnique({
