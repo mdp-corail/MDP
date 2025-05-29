@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
@@ -43,7 +51,7 @@ const handler = NextAuth({
         signIn: '/signin',
     },
     callbacks: {
-        async session({ session, token }) {
+        async session({ session }) {
             if (!session.user?.email) return session;
 
             const user = await prisma.user.findUnique({

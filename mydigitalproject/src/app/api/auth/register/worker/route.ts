@@ -1,3 +1,4 @@
+
 import { prisma } from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
@@ -44,7 +45,7 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ message: 'User created', userId: newUser.id }, { status: 201 });
 
-    } catch (err: any) {
+    } catch (err) {
         console.error('❌ Worker registration error:', err);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
