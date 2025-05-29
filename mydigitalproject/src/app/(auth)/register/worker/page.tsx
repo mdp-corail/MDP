@@ -54,7 +54,7 @@ export default function Register() {
         }
 
         try {
-            const res = await fetch('/api/auth/register/worker', {
+            const res = await fetch(`${process.env.API_BASE_URL}/auth/register/company}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form),
