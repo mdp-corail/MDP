@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  type      UserType
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  worker  WorkerProfile?  @relation("UserToWorker")
+  company CompanyProfile? @relation("UserToCompany")
+}
+
+model WorkerProfile {
+  id          String  @id @default(cuid())
+  name        String
+  surname     String
+  country     String
+  description String?
+  picture     String?
+  resumeFile  String?
+  xp          Int     @default(0)
+  level       Int     @default(1)
+  isActive    Boolean @default(false)
+  token       String?
+
+  userId String @unique
+  user   User   @relation("UserToWorker", fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model CompanyProfile {
+  id              String   @id @default(cuid())
+  name            String
+  logo            String?
+  country         String
+  description     String?
+  employeeCount   Int
+  website         String?
+  expertiseFields String[]
+  isActive        Boolean  @default(false)
+  token           String?
+
+  userId String @unique
+  user   User   @relation("UserToCompany", fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum UserType {
+  WORKER
+  COMPANY
+}
