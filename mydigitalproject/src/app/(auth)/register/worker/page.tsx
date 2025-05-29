@@ -12,20 +12,18 @@ import {
     Snackbar,
     Alert,
 } from '@mui/material';
-import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react';
+import { getProviders, signIn } from 'next-auth/react';
 import { JSX, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { SvgIconProps } from '@mui/material';
-
 
 export default function Register() {
     const isMobile = useMediaQuery('(max-width: 780px)');
-    const [providers, setProviders] = useState<Record<LiteralUnion<string, string>, ClientSafeProvider> | null>(null);
+    const [providers, setProviders] = useState<any>(null);
     const router = useRouter();
 
-    const providerIcons: Record<string, (props: SvgIconProps) => JSX.Element> = {
+    const providerIcons: Record<string, (props?: any) => JSX.Element> = {
         google: (props) => <GoogleIcon {...props} />,
         linkedin: (props) => <LinkedInIcon {...props} />,
     };
@@ -55,9 +53,9 @@ export default function Register() {
         }
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/register/worker`, {
+            const res = await fetch('/api/auth/register/worker', {
                 method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form),
             });
 
@@ -67,7 +65,7 @@ export default function Register() {
                 const data = await res.json();
                 setError(data.error || 'Erreur lors de la création du compte.');
             }
-        } catch {
+        } catch (err) {
             setError('Erreur serveur. Veuillez réessayer.');
         }
     };
@@ -88,7 +86,7 @@ export default function Register() {
             </Stack>
 
             {providers &&
-                Object.values(providers).map((provider) => (
+                Object.values(providers).map((provider: any) => (
                     <Button
                         disableRipple
                         disableFocusRipple

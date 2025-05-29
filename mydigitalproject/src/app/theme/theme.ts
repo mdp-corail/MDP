@@ -67,8 +67,7 @@ const theme = createTheme({
                         border: "2px solid #3A3A3A",
                         borderRadius: "14px",
                         "&:hover": {
-                            boxShadow: "none",
-                            border: "2px solid #3229D6",
+                            border: "2px solid transparent",
                             backgroundColor: "#3229D6",
                             color: "#F9F9F9",
                         }
@@ -97,7 +96,6 @@ const theme = createTheme({
                     style: {
                         backgroundColor: "#c61414",
                         color: "#F9F9F9",
-                        border: "2px solid #c61414",
                         height: "41px",
                         borderRadius: "14px",
                     },
