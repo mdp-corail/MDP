@@ -23,20 +23,38 @@ const handler = NextAuth({
                 password: { label: 'Mot de passe', type: 'password' },
             },
             async authorize(credentials) {
-                if (!credentials?.email || !credentials?.password) return null;
+                console.log("🛂 Received credentials:", credentials);
+
+                if (!credentials?.email || !credentials?.password) {
+                    console.warn("⛔ Missing email or password");
+                    return null;
+                }
 
                 const user = await prisma.user.findUnique({
                     where: { email: credentials.email },
                     include: { worker: true, company: true },
                 });
 
-                if (!user || !user.password) return null;
+                if (!user) {
+                    console.warn("⛔ No user found for email:", credentials.email);
+                    return null;
+                }
+
+                if (!user.password) {
+                    console.warn("⛔ User has no password set:", user.email);
+                    return null;
+                }
 
                 const isValid = await bcrypt.compare(credentials.password, user.password);
-                if (!isValid) return null;
+                if (!isValid) {
+                    console.warn("⛔ Invalid password for user:", user.email);
+                    return null;
+                }
 
+                console.log("✅ User authenticated:", user.email);
                 return { id: user.id, email: user.email, type: user.type };
-            },
+            }
+            ,
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
