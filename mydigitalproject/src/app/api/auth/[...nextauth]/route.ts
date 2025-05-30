@@ -23,22 +23,16 @@ const handler = NextAuth({
                 password: { label: 'Mot de passe', type: 'password' },
             },
             async authorize(credentials) {
-                const email = credentials?.email?.toString();
-                const password = credentials?.password?.toString();
-
-                if (!email || !password) {
-                    console.warn("⛔ Missing email or password");
-                    return null;
-                }
+                if (!credentials?.email || !credentials?.password) return null;
 
                 const user = await prisma.user.findUnique({
-                    where: { email },
+                    where: { email: credentials.email },
                     include: { worker: true, company: true },
                 });
 
                 if (!user || !user.password) return null;
 
-                const isValid = await bcrypt.compare(password, user.password);
+                const isValid = await bcrypt.compare(credentials.password, user.password);
                 if (!isValid) return null;
 
                 return { id: user.id, email: user.email, type: user.type };
