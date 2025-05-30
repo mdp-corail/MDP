@@ -19,7 +19,6 @@ import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { SvgIconProps } from '@mui/material';
 
-
 export default function RegisterCompany() {
     const isMobile = useMediaQuery('(max-width: 780px)');
     const [providers, setProviders] = useState<Record<LiteralUnion<string, string>, ClientSafeProvider> | null>(null);
@@ -41,25 +40,59 @@ export default function RegisterCompany() {
 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
+        if (error) setError('');
     };
 
-    const handleSubmit = async () => {
-        setError('');
+    const validateForm = () => {
+        if (!form.name || !form.country || !form.email || !form.password || !form.confirmPassword || !form.employeeCount) {
+            setError('Tous les champs sont obligatoires.');
+            return false;
+        }
 
         if (form.password !== form.confirmPassword) {
             setError('Les mots de passe ne correspondent pas.');
-            return;
+            return false;
         }
 
+        if (form.password.length < 6) {
+            setError('Le mot de passe doit contenir au moins 6 caractères.');
+            return false;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(form.email)) {
+            setError('Veuillez entrer une adresse email valide.');
+            return false;
+        }
+
+        if (Number(form.employeeCount) <= 0) {
+            setError('Le nombre de salariés doit être supérieur à 0.');
+            return false;
+        }
+
+        return true;
+    };
+
+    const handleSubmit = async () => {
+        if (!validateForm()) return;
+
+        setError('');
+        setLoading(true);
+
         try {
-            const res = await fetch("/api/auth/register/company}", {
+            // CORRECTION : suppression de l'accolade en trop dans l'URL
+            const res = await fetch("/api/auth/register/company", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    ...form,
+                    name: form.name,
+                    country: form.country,
+                    email: form.email,
+                    password: form.password,
                     employeeCount: Number(form.employeeCount),
                 }),
             });
@@ -67,17 +100,30 @@ export default function RegisterCompany() {
             const data = await res.json();
 
             if (res.ok) {
-                router.push('/register/success');
+                setSuccess(true);
+                setTimeout(() => {
+                    router.push('/register/success');
+                }, 2000);
             } else {
                 setError(data.error || 'Erreur lors de la création du compte.');
             }
-        } catch {
+        } catch (err) {
+            console.error('Erreur lors de l\'inscription:', err);
             setError('Erreur serveur. Veuillez réessayer.');
+        } finally {
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        getProviders().then(setProviders);
+        getProviders().then((providers) => {
+            if (providers) {
+                const filteredProviders = Object.fromEntries(
+                    Object.entries(providers).filter(([key]) => key !== 'credentials')
+                );
+                setProviders(filteredProviders);
+            }
+        });
     }, []);
 
     return (
@@ -90,6 +136,7 @@ export default function RegisterCompany() {
                     Ou cliquez ici si vous êtes un particulier
                 </Typography>
             </Stack>
+
             {providers &&
                 Object.values(providers).map((provider) => (
                     <Button
@@ -99,6 +146,7 @@ export default function RegisterCompany() {
                         onClick={() => signIn(provider.id)}
                         startIcon={providerIcons[provider.id]?.({ sx: { fontSize: '32px !important', mr: 4 } })}
                         sx={{ m: 1, width: '340px' }}
+                        disabled={loading}
                     >
                         Utiliser mon compte {provider.name}
                     </Button>
@@ -107,8 +155,24 @@ export default function RegisterCompany() {
             <Divider sx={{ my: 4, width: isMobile ? '100%' : '80%', backgroundColor: 'primary.light' }} />
 
             <FormControl sx={{ gap: 2, textAlign: 'left' }}>
-                <TextField label="Nom de l'entreprise" name="name" value={form.name} onChange={handleChange} size="small" required />
-                <TextField label="Pays" name="country" value={form.country} onChange={handleChange} size="small" required />
+                <TextField
+                    label="Nom de l'entreprise"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    size="small"
+                    required
+                    disabled={loading}
+                />
+                <TextField
+                    label="Pays"
+                    name="country"
+                    value={form.country}
+                    onChange={handleChange}
+                    size="small"
+                    required
+                    disabled={loading}
+                />
                 <TextField
                     label="Nombre de salariés"
                     name="employeeCount"
@@ -116,16 +180,49 @@ export default function RegisterCompany() {
                     onChange={(e) => {
                         const onlyNumbers = e.target.value.replace(/\D/g, '');
                         setForm({ ...form, employeeCount: onlyNumbers });
+                        if (error) setError('');
                     }}
                     size="small"
                     required
+                    disabled={loading}
                     inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                 />
-                <TextField label="Email" name="email" value={form.email} onChange={handleChange} size="small" required />
-                <TextField label="Mot de passe" name="password" type="password" value={form.password} onChange={handleChange} size="small" required />
-                <TextField label="Confirmer le mot de passe" name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} size="small" required />
-                <Button onClick={handleSubmit} variant="alt" sx={{ width: '340px', alignSelf: 'center', mt: 2 }}>
-                    Valider
+                <TextField
+                    label="Email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    size="small"
+                    required
+                    disabled={loading}
+                />
+                <TextField
+                    label="Mot de passe"
+                    name="password"
+                    type="password"
+                    value={form.password}
+                    onChange={handleChange}
+                    size="small"
+                    required
+                    disabled={loading}
+                />
+                <TextField
+                    label="Confirmer le mot de passe"
+                    name="confirmPassword"
+                    type="password"
+                    value={form.confirmPassword}
+                    onChange={handleChange}
+                    size="small"
+                    required
+                    disabled={loading}
+                />
+                <Button
+                    onClick={handleSubmit}
+                    variant="alt"
+                    sx={{ width: '340px', alignSelf: 'center', mt: 2 }}
+                    disabled={loading}
+                >
+                    {loading ? 'Création en cours...' : 'Valider'}
                 </Button>
             </FormControl>
 

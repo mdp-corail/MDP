@@ -118,7 +118,7 @@ export default function Register() {
                 setProviders(filteredProviders);
             }
         });
-    }, [loading]);
+    }, []);
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: isMobile ? 'left' : 'center' }}>
@@ -148,13 +148,13 @@ export default function Register() {
             <Divider sx={{ my: 4, width: isMobile ? '100%' : '80%', backgroundColor: 'primary.light' }} />
 
             <FormControl sx={{ gap: 2, textAlign: 'left' }}>
-                <TextField label="Nom" name="name" value={form.name} onChange={handleChange} size="small" required />
-                <TextField label="Prénom" name="surname" value={form.surname} onChange={handleChange} size="small" required />
-                <TextField label="Pays" name="country" value={form.country} onChange={handleChange} size="small" required />
+                <TextField label="Nom" name="name" value={form.name} onChange={handleChange} size="small" required disabled={loading} />
+                <TextField label="Prénom" name="surname" value={form.surname} onChange={handleChange} size="small" required disabled={loading} />
+                <TextField label="Pays" name="country" value={form.country} onChange={handleChange} size="small" required disabled={loading} />
                 <TextField label="Email" name="email" value={form.email} onChange={handleChange} size="small" required />
-                <TextField label="Mot de passe" name="password" type="password" value={form.password} onChange={handleChange} size="small" required />
-                <TextField label="Confirmer le mot de passe" name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} size="small" required />
-                <Button onClick={handleSubmit} variant="alt" sx={{ width: '340px', alignSelf: 'center', mt: 2 }}>
+                <TextField label="Mot de passe" name="password" type="password" value={form.password} onChange={handleChange} size="small" required disabled={loading} />
+                <TextField label="Confirmer le mot de passe" name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} size="small" required disabled={loading} />
+                <Button disabled={loading} onClick={handleSubmit} variant="alt" sx={{ width: '340px', alignSelf: 'center', mt: 2 }}>
                     Valider
                 </Button>
             </FormControl>
