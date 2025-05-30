@@ -79,7 +79,6 @@ export default function Register() {
         setLoading(true);
 
         try {
-            // ⚠️ URL corrigée : /api/ au lieu de /auth/
             const res = await fetch("/api/auth/register/worker", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -112,7 +111,6 @@ export default function Register() {
 
     useEffect(() => {
         getProviders().then((providers) => {
-            // Filtrer pour exclure le provider 'credentials'
             if (providers) {
                 const filteredProviders = Object.fromEntries(
                     Object.entries(providers).filter(([key]) => key !== 'credentials')
@@ -120,7 +118,7 @@ export default function Register() {
                 setProviders(filteredProviders);
             }
         });
-    }, []);
+    }, [loading]);
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: isMobile ? 'left' : 'center' }}>
