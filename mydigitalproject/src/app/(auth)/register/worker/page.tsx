@@ -40,39 +40,86 @@ export default function Register() {
 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
+        if (error) setError('');
     };
 
-    const handleSubmit = async () => {
-        setError('');
+    const validateForm = () => {
+        if (!form.name || !form.surname || !form.email || !form.country || !form.password || !form.confirmPassword) {
+            setError('Tous les champs sont obligatoires.');
+            return false;
+        }
 
         if (form.password !== form.confirmPassword) {
             setError('Les mots de passe ne correspondent pas.');
-            return;
+            return false;
         }
 
+        if (form.password.length < 6) {
+            setError('Le mot de passe doit contenir au moins 6 caractères.');
+            return false;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(form.email)) {
+            setError('Veuillez entrer une adresse email valide.');
+            return false;
+        }
+
+        return true;
+    };
+
+    const handleSubmit = async () => {
+        if (!validateForm()) return;
+
+        setError('');
+        setLoading(true);
+
         try {
-            const res = await fetch("/auth/register/worker", {
+            // ⚠️ URL corrigée : /api/ au lieu de /auth/
+            const res = await fetch("/api/auth/register/worker", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form),
+                body: JSON.stringify({
+                    name: form.name,
+                    surname: form.surname,
+                    email: form.email,
+                    country: form.country,
+                    password: form.password,
+                }),
             });
 
+            const data = await res.json();
+
             if (res.ok) {
-                router.push('/register/success');
+                setSuccess(true);
+                setTimeout(() => {
+                    router.push('/register/success');
+                }, 2000);
             } else {
-                const data = await res.json();
                 setError(data.error || 'Erreur lors de la création du compte.');
             }
-        } catch {
+        } catch (err) {
+            console.error('Erreur lors de l\'inscription:', err);
             setError('Erreur serveur. Veuillez réessayer.');
+        } finally {
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        getProviders().then(setProviders);
+        getProviders().then((providers) => {
+            // Filtrer pour exclure le provider 'credentials'
+            if (providers) {
+                const filteredProviders = Object.fromEntries(
+                    Object.entries(providers).filter(([key]) => key !== 'credentials')
+                );
+                setProviders(filteredProviders);
+            }
+        });
     }, []);
 
     return (
