@@ -94,7 +94,7 @@ const handler = NextAuth({
             }
             return token;
         },
-        async session({ session, token }) {
+        async session({ session }) {
             try {
                 if (!session.user?.email) return session;
 
