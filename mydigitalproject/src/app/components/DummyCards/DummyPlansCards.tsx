@@ -1,7 +1,7 @@
 import { Card, CardContent, Stack, Typography } from '@mui/material'
 import React from 'react'
 
-const DummyCards = () => {
+const DummyPlansCards = () => {
     const cardsData = [
         {
             id: 1,
@@ -36,4 +36,4 @@ const DummyCards = () => {
     )
 }
 
-export default DummyCards
+export default DummyPlansCards

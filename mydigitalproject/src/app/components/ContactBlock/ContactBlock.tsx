@@ -2,21 +2,24 @@
 
 import { Box, IconButton, Stack, Typography, useMediaQuery } from '@mui/material'
 import EastIcon from '@mui/icons-material/East';
+import SouthIcon from '@mui/icons-material/South';
 
 const ContactBlock = () => {
     const isMobile = useMediaQuery("(max-width: 780px)");
     return (
-        <Box sx={{ display: "flex", alignItems: "center", borderTop: "1px solid #3A3A3A", p: isMobile ? "40px 30px" : "40px 60px", gap: 2 }}>
-            <Stack>
-                <Typography>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: isMobile ? "center" : "flex-start", borderTop: "1px solid #3A3A3A", p: isMobile ? "40px 30px" : "40px 60px", gap: 2, textAlign: isMobile ? "center" : "left" }}>
+            <Stack sx={{ alignItems: isMobile ? "center" : "flex-start"}}>
+                <Typography sx={{ fontSize: "22px"}}>
                     Des questions ?
                 </Typography>
+                {isMobile ?
+                    <SouthIcon /> : null}
                 <a href="/contact">
                     <Stack
                         direction={isMobile ? "column" : "row"}
                         gap={2}
                         sx={{
-                            alignItems: isMobile ? "flex-start" : "center",
+                            alignItems: "center",
                             cursor: "pointer",
                             "&:hover .icon-button": {
                                 opacity: 1,
@@ -25,15 +28,15 @@ const ContactBlock = () => {
                         }}
                     >
                         <Typography variant="h3" sx={{ color: "primary.main" }}>
-                            Contactez-nous
+                            Contactez-nous !
                         </Typography>
                         <IconButton
                             className="icon-button"
                             sx={{
                                 left: isMobile ? "50" : "0",
                                 backgroundColor: "primary.main",
-                                width: "60px",
-                                height: "60px",
+                                width: isMobile ? "80px" : "60px",
+                                height: isMobile ? "80px" : "60px",
                                 p: 2,
                                 color: "primary.light",
                                 opacity: isMobile ? 1 : 0,
@@ -44,7 +47,8 @@ const ContactBlock = () => {
                                 },
                             }}
                         >
-                            <EastIcon />
+
+                            {isMobile ? <Typography sx={{ fontSize: "22px" }}>GO !</Typography> : <EastIcon />}
                         </IconButton>
                     </Stack>
                 </a>

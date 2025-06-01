@@ -84,8 +84,8 @@ const Header = () => {
                         <img
                             src={
                                 isMobile
-                                    ? '/assets/images/meetwork-logo-black.png'
-                                    : '/assets/images/meetwork-black.png'
+                                    ? '/images/meetwork-logo-black.png'
+                                    : '/images/meetwork-black.png'
                             }
                             alt="Logo Meetwork"
                             width={isMobile ? 61 : 250}

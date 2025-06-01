@@ -2,9 +2,10 @@
 
 import { Box, Button, Stack, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
-import DummyCards from "./components/DummyCards/DummyCards";
+import DummyPlansCards from "./components/DummyCards/DummyPlansCards";
 import CarouselPlans from "./components/Carousels/CarouselPlans";
 import CarouselAds from "./components/Carousels/CarouselAds";
+import DummyAdsCards from "./components/DummyCards/DummyAdsCards";
 
 
 export default function Page() {
@@ -43,7 +44,7 @@ export default function Page() {
             <CarouselPlans />
             :
             <Stack direction="row" gap={4}>
-              <DummyCards />
+              <DummyPlansCards />
             </Stack>
           }
         </Box>
@@ -64,7 +65,7 @@ export default function Page() {
             <CarouselAds />
             :
             <Stack direction="row" gap={4}>
-              <DummyCards />
+              <DummyAdsCards />
             </Stack>
           }
         </Box>

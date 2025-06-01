@@ -20,7 +20,7 @@ const Footer = () => {
             {/* Bloc 1 */}
             <Box sx={{ display: "flex", flexDirection: 'column', width: isTablet ? "100%" : "25%" }}>
                 <Box sx={{ width: isTablet ? "100%" : "50%", mb: "41px" }}>
-                    <img src="/assets/images/meetwork-white.png" alt="Logo Meetwork" width={269} height={49} />
+                    <img src="/images/meetwork-white.png" alt="Logo Meetwork" width={269} height={49} />
                 </Box>
                 {/* Bloc RS */}
                 <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", width: "100%" }}>
