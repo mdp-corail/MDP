@@ -84,7 +84,6 @@ export default function RegisterCompany() {
         setLoading(true);
 
         try {
-            // CORRECTION : suppression de l'accolade en trop dans l'URL
             const res = await fetch("/api/auth/register/company", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

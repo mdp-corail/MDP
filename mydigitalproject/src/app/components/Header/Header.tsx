@@ -198,9 +198,20 @@ const Header = () => {
 
                     {/* Mobile Menu Button */}
                     {isMobile && (
-                        <IconButton disableFocusRipple disableTouchRipple disableRipple onClick={() => setDrawerOpen(true)} sx={{ p: 0 }}>
-                            <MenuIcon fontSize="large" sx={{ color: "primary.main" }} />
-                        </IconButton>
+                        <Stack direction="row" gap={2}>
+                            <IconButton
+                                disableFocusRipple
+                                disableRipple
+                                disableTouchRipple
+                                onClick={handleSearchOpen}
+                                sx={{ display: 'flex', alignItems: 'center', pr: 0 }}
+                            >
+                                <SearchIcon sx={{ fontSize: '25px !important', color: "primary.main" }} />
+                            </IconButton>
+                            <IconButton disableFocusRipple disableTouchRipple disableRipple onClick={() => setDrawerOpen(true)} sx={{ p: 0 }}>
+                                <MenuIcon fontSize="large" sx={{ color: "primary.main" }} />
+                            </IconButton>
+                        </Stack>
                     )}
                 </Toolbar>
             </AppBar>
@@ -208,7 +219,6 @@ const Header = () => {
             {/* Mobile Drawer */}
             <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', width: "100vw", height: "100vh", background: "linear-gradient(180deg, #086AA6 0%, #032940 100%)", p: "40px 30px", color: "primary.light" }}>
-
                     {/* Languages  */}
                     <Stack direction="row" gap={"2"} justifyContent={"space-between"}>
                         <IconButton

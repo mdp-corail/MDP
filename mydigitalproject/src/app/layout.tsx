@@ -1,5 +1,6 @@
 
 import type { Metadata } from "next";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Montserrat, Montserrat_Alternates } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "./theme/theme-provider";
@@ -8,6 +9,9 @@ import ContactBlock from "./components/ContactBlock/ContactBlock";
 import Header from "./components/Header/Header";
 import BackToTopArrow from "./components/BackToTopArrow/BackToTopArrow";
 import SessionProviderWrapper from "./components/SessionProviderWrapper";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 const montserrat = Montserrat({
   subsets: ['latin'],
