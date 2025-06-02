@@ -11,8 +11,6 @@ import { useRouter } from 'next/navigation';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import BackButton from '@/app/components/BackButton/BackButton';
 
-
-const countryOptions = ['FRANCE', 'USA', 'DEUTSCHLAND', 'UK', 'ESPANA', 'ITALIA', 'Other'];
 const durationOptions = [
     "Moins d'une semaine",
     '1 à 4 semaines',
@@ -20,13 +18,23 @@ const durationOptions = [
     '3 à 6 mois',
     '6 à 12 mois',
 ];
+const countryOptions = ['FRANCE', 'USA', 'DEUTSCHLAND', 'UK', 'ESPANA', 'ITALIA', 'Other'];
+
 const sectorOptions = [
-    'Développement/Programmation',
-    'Web Design',
-    'Création Digitale',
-    'Marketing',
-    'Communication',
+    'DEVELOPPEMENT_PROGRAMMATION',
+    'WEB_DESIGN',
+    'CREATION_DIGITALE',
+    'MARKETING',
+    'COMMUNICATION',
 ];
+
+const sectorLabels: Record<string, string> = {
+    DEVELOPPEMENT_PROGRAMMATION: 'Développement/Programmation',
+    WEB_DESIGN: 'Web Design',
+    CREATION_DIGITALE: 'Création Digitale',
+    MARKETING: 'Marketing',
+    COMMUNICATION: 'Communication',
+};
 
 export default function CreateOfferPage() {
     const [form, setForm] = useState({
@@ -154,8 +162,10 @@ export default function CreateOfferPage() {
                         label="Secteur d'activité"
                         disabled={loading}
                     >
-                        {sectorOptions.map((sector) => (
-                            <MenuItem key={sector} value={sector}>{sector}</MenuItem>
+                        {sectorOptions.map((value) => (
+                            <MenuItem key={value} value={value}>
+                                {sectorLabels[value]}
+                            </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
