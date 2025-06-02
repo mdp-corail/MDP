@@ -1,8 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
+
 'use client';
 
 import {
     Box, Button, FormControl, TextField, Typography, Snackbar, Alert, Select, MenuItem, InputLabel, Slider,
-    TextareaAutosize,
     Input
 } from '@mui/material';
 import { useState } from 'react';

@@ -6,7 +6,6 @@ import DummyPlansCards from "./components/DummyCards/DummyPlansCards";
 import CarouselPlans from "./components/Carousels/CarouselPlans";
 import CarouselAds from "./components/Carousels/CarouselAds";
 import DummyAdsCards from "./components/DummyCards/DummyAdsCards";
-import BackToTopArrow from "./components/BackToTopArrow/BackToTopArrow";
 
 
 export default function Page() {
