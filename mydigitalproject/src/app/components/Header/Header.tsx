@@ -263,7 +263,7 @@ const Header = () => {
                     {/* Main block */}
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: 'center', mt: 8, justifyContent: 'center' }}>
                         <img
-                            src={'/assets/images/meetwork-white.png'
+                            src={'/images/meetwork-white.png'
                             }
                             alt="Logo Meetwork"
                             width={280}

@@ -6,6 +6,7 @@ import DummyPlansCards from "./components/DummyCards/DummyPlansCards";
 import CarouselPlans from "./components/Carousels/CarouselPlans";
 import CarouselAds from "./components/Carousels/CarouselAds";
 import DummyAdsCards from "./components/DummyCards/DummyAdsCards";
+import BackToTopArrow from "./components/BackToTopArrow/BackToTopArrow";
 
 
 export default function Page() {
@@ -26,7 +27,7 @@ export default function Page() {
             Nous découvrir
           </Button>
         </Stack>
-        <Image alt="" src="/assets/images/illustration1.jpg" width={695} height={657} style={{ objectFit: "contain", width: "100%", height: "100%", maxWidth: "695px" }} />
+        <Image alt="" src="/images/illustration1.jpg" width={695} height={657} style={{ objectFit: "contain", width: "100%", height: "100%", maxWidth: "695px" }} />
       </Box>
 
       {/* Bloc 2 */}

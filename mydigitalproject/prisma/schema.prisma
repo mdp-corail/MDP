@@ -15,8 +15,9 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  worker  WorkerProfile?  @relation("UserToWorker")
-  company CompanyProfile? @relation("UserToCompany")
+  worker      WorkerProfile?  @relation("UserToWorker")
+  company     CompanyProfile? @relation("UserToCompany")
+  Application Application[]
 }
 
 model WorkerProfile {
@@ -48,11 +49,67 @@ model CompanyProfile {
   isActive        Boolean  @default(false)
   token           String?
 
-  userId String @unique
-  user   User   @relation("UserToCompany", fields: [userId], references: [id], onDelete: Cascade)
+  userId String  @unique
+  user   User    @relation("UserToCompany", fields: [userId], references: [id], onDelete: Cascade)
+  Offer  Offer[]
 }
 
 enum UserType {
   WORKER
   COMPANY
+}
+
+model Offer {
+  id          String  @id @default(cuid())
+  companyId   String
+  title       String
+  description String
+  country     Country
+  duration    String
+  language    Country
+  sector      Sector
+
+  company      CompanyProfile @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  applications Application[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Application {
+  id      String            @id @default(cuid())
+  offerId String
+  userId  String
+  status  ApplicationStatus
+  cv      String
+
+  offer Offer @relation(fields: [offerId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Country {
+  FRANCE
+  USA
+  DEUTSCHLAND
+  UK
+  ESPANA
+  ITALIA
+  Other
+}
+
+enum Sector {
+  DEVELOPPEMENT_PROGRAMMATION
+  WEB_DESIGN
+  CREATION_DIGITALE
+  MARKETING
+  COMMUNICATION
+}
+
+enum ApplicationStatus {
+  ACCEPTED
+  PENDING
+  REFUSED
 }

@@ -7,7 +7,6 @@ import ThemeRegistry from "./theme/theme-provider";
 import Footer from "./components/Footer/Footer";
 import ContactBlock from "./components/ContactBlock/ContactBlock";
 import Header from "./components/Header/Header";
-import BackToTopArrow from "./components/BackToTopArrow/BackToTopArrow";
 import SessionProviderWrapper from "./components/SessionProviderWrapper";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -47,7 +46,6 @@ export default function RootLayout({
             <main className="page-container">
                 {children}
             </main>
-            <BackToTopArrow />
             <ContactBlock />
             <Footer />
           </SessionProviderWrapper>
