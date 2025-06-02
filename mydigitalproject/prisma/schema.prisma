@@ -68,6 +68,7 @@ model Offer {
   duration    String
   language    Country
   sector      Sector
+  people      Int
 
   company      CompanyProfile @relation(fields: [companyId], references: [id], onDelete: Cascade)
   applications Application[]

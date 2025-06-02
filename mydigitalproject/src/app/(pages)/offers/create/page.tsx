@@ -1,10 +1,15 @@
 'use client';
 
 import {
-    Box, Button, FormControl, Stack, TextField, Typography, Snackbar, Alert, Select, MenuItem, InputLabel, FormHelperText,
+    Box, Button, FormControl, TextField, Typography, Snackbar, Alert, Select, MenuItem, InputLabel, Slider,
+    TextareaAutosize,
+    Input
 } from '@mui/material';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import type { SelectChangeEvent } from '@mui/material/Select';
+import BackButton from '@/app/components/BackButton/BackButton';
+
 
 const countryOptions = ['FRANCE', 'USA', 'DEUTSCHLAND', 'UK', 'ESPANA', 'ITALIA', 'Other'];
 const durationOptions = [
@@ -30,6 +35,7 @@ export default function CreateOfferPage() {
         description: '',
         language: '',
         sector: '',
+        people: 1,
     });
 
     const [error, setError] = useState('');
@@ -37,9 +43,15 @@ export default function CreateOfferPage() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setForm((prev) => ({ ...prev, [name as string]: value }));
+        setForm((prev) => ({ ...prev, [name]: value }));
+        if (error) setError('');
+    };
+
+    const handleSelectChange = (e: SelectChangeEvent) => {
+        const { name, value } = e.target;
+        setForm((prev) => ({ ...prev, [name]: value }));
         if (error) setError('');
     };
 
@@ -77,22 +89,21 @@ export default function CreateOfferPage() {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <BackButton />
             <Typography variant="h2" sx={{ mt: 4, mb: 2, color: '#086AA6', textAlign: 'center' }}>
                 Créer votre annonce
             </Typography>
-
             <FormControl sx={{ width: '100%', maxWidth: 500, gap: 2 }}>
-                <TextField label="Titre" name="title" value={form.title} onChange={handleChange} size="small" disabled={loading} />
-
                 <FormControl size="small">
                     <InputLabel id="country-label">Pays</InputLabel>
                     <Select
                         labelId="country-label"
                         name="country"
                         value={form.country}
-                        onChange={handleChange}
+                        onChange={handleSelectChange}
                         label="Pays"
                         disabled={loading}
+                        sx={{}}
                     >
                         {countryOptions.map((country) => (
                             <MenuItem key={country} value={country}>{country}</MenuItem>
@@ -106,7 +117,7 @@ export default function CreateOfferPage() {
                         labelId="duration-label"
                         name="duration"
                         value={form.duration}
-                        onChange={handleChange}
+                        onChange={handleSelectChange}
                         label="Durée"
                         disabled={loading}
                     >
@@ -122,7 +133,7 @@ export default function CreateOfferPage() {
                         labelId="language-label"
                         name="language"
                         value={form.language}
-                        onChange={handleChange}
+                        onChange={handleSelectChange}
                         label="Langue"
                         disabled={loading}
                     >
@@ -138,7 +149,7 @@ export default function CreateOfferPage() {
                         labelId="sector-label"
                         name="sector"
                         value={form.sector}
-                        onChange={handleChange}
+                        onChange={handleSelectChange}
                         label="Secteur d'activité"
                         disabled={loading}
                     >
@@ -147,18 +158,35 @@ export default function CreateOfferPage() {
                         ))}
                     </Select>
                 </FormControl>
+                <FormControl>
+                    <Typography gutterBottom>Nombre de personnes concernées</Typography>
+                    <Slider
+                        name="people"
+                        value={form.people}
+                        onChange={(e, value) => {
+                            setForm((prev) => ({ ...prev, people: value as number }));
+                        }}
+                        min={1}
+                        max={100}
+                        step={1}
+                        valueLabelDisplay="auto"
+                        disabled={loading}
+                        sx={{ color: 'secondary.light' }}
+                    />
+                </FormControl>
 
-                <TextField
-                    label="Description"
+                <TextField label="Titre" name="title" value={form.title} onChange={handleInputChange} size="small" disabled={loading} />
+                <Input
+                    placeholder="Description"
                     name="description"
                     value={form.description}
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     multiline
                     minRows={4}
                     maxRows={12}
                     size="small"
                     disabled={loading}
-                    sx={{ resize: 'none' }}
+                    sx={{ p: 2, border: '2px solid #3A3A3A', borderRadius: 2 }}
                 />
 
                 <Button variant="contained" onClick={handleSubmit} disabled={loading} sx={{ mt: 2 }}>

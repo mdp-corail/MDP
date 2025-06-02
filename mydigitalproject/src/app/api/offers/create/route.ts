@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
     try {
         const body = await req.json();
-        const { title, description, country, duration } = body;
+        const { title, description, country, duration, language, sector, people } = body;
 
         if (!title || !description || !country || !duration) {
             return NextResponse.json({ error: 'Tous les champs sont requis.' }, { status: 400 });
@@ -35,6 +35,9 @@ export async function POST(req: Request) {
                 description,
                 country,
                 duration,
+                language,
+                sector,
+                people,
                 companyId: user.company.id,
             },
         });
