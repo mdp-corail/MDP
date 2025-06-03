@@ -33,9 +33,6 @@ export default async function OfferDetailsPage({ params }: PageProps) {
 
     // Compter les candidatures par statut
     const totalApplications = offer.applications.length;
-    const pendingApplications = offer.applications.filter(app => app.status === 'PENDING').length;
-    const acceptedApplications = offer.applications.filter(app => app.status === 'ACCEPTED').length;
-    const refusedApplications = offer.applications.filter(app => app.status === 'REFUSED').length;
 
     return (
         <Box sx={{ maxWidth: 700, mx: 'auto', mt: 4, p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, Typography, Box, Stack, Button, Divider, Avatar } from '@mui/material';
+import { Card, Typography, Box, Stack, Button, Divider, Avatar } from '@mui/material';
 import RoomIcon from '@mui/icons-material/Room';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import GroupIcon from '@mui/icons-material/Group';

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+
 import { Card, Divider, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import React, { useState } from 'react'
 
@@ -44,36 +46,9 @@ const OffersFilters = () => {
     const handleSelectChange = (e: SelectChangeEvent) => {
         const { name, value } = e.target;
         setForm((prev) => ({ ...prev, [name]: value }));
+        setLoading(true);
         if (error) setError('');
     };
-
-    const handleSubmit = async () => {
-        const { title, description, country, duration, language, sector } = form;
-        if (!title || !description || !country || !duration || !language || !sector) {
-            setError('Tous les champs sont requis.');
-            return;
-        }
-
-        setLoading(true);
-        try {
-            const res = await fetch('/api/offers/create', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form),
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                setError(data.error || 'Erreur lors de la création de l\'offre.');
-                return;
-            }
-    } catch (err) {
-        console.error('Erreur envoi:', err);
-        setError('Erreur serveur. Veuillez réessayer.');
-    }
-}
-
 
     return (
         <Card sx={{ width: "100%", p: 2, boxShadow: "none", border: "2px solid #3A3A3A" }}>

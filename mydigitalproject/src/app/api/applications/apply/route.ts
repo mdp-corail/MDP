@@ -24,7 +24,7 @@ export async function POST(req: Request) {
             );
         }
 
-        if (!name || !surname || !email || !file) {
+        if (!name || !surname || !email || !file || !phone) {
             return NextResponse.json(
                 { error: 'Tous les champs obligatoires doivent être remplis.' },
                 { status: 400 }
