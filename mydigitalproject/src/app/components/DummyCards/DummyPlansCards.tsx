@@ -11,7 +11,7 @@ const DummyPlansCards = () => {
         {
             id: 2,
             title: "Premium",
-            description: "26.99€/mois",
+            description: "25.99€/mois",
         },
         {
             id: 3,

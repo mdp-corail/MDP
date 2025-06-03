@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Box, CircularProgress, Alert } from '@mui/material';
 import OfferCards from '@/app/components/OfferCards/OfferCards';
 import { Offer } from '@prisma/client';
+import OffersFilters from '@/app/components/OffersFilters/OffersFilters';
 
 
 export default function OffersPage() {
@@ -34,8 +35,18 @@ export default function OffersPage() {
 
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4, justifyContent: 'center', py: 4 }}>
+            <OffersFilters />
             {offers.map((offer) => (
-                <OfferCards key={offer.id} offer={offer} />
+                <OfferCards 
+                key={offer.id}
+                    id={offer.id}
+                    companyName={offer.companyId} 
+                    logoUrl={''}
+                    title={offer.title}
+                    location={offer.country}
+                    duration={offer.duration}
+                    people={offer.people.toString()}
+                    languages={offer.language} />
             ))}
         </Box>
     );

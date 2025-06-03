@@ -68,14 +68,8 @@ export default function OfferCard({
             <Box textAlign="center" mt={3}>
                 <Link href={`/offers/${id}`}>
                     <Button
-                        variant="contained"
-                        sx={{
-                            borderRadius: '12px',
-                            textTransform: 'none',
-                            backgroundColor: '#333',
-                            px: 4,
-                            '&:hover': { backgroundColor: '#111' },
-                        }}
+
+                    sx={{ width: "231px" }}
                     >
                         Découvrir
                     </Button>

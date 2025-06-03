@@ -112,7 +112,6 @@ export default function CreateOfferPage() {
                         onChange={handleSelectChange}
                         label="Pays"
                         disabled={loading}
-                        sx={{}}
                     >
                         {countryOptions.map((country) => (
                             <MenuItem key={country} value={country}>{country}</MenuItem>
