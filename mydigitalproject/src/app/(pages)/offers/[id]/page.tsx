@@ -1,32 +1,41 @@
-
 import { prisma } from '@/app/lib/prisma';
 import { notFound } from 'next/navigation';
-import { Box, Button, Stack, Typography, Divider } from '@mui/material';
+import { Box, Button, Stack, Typography, Divider, Chip } from '@mui/material';
 import RoomIcon from '@mui/icons-material/Room';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import GroupIcon from '@mui/icons-material/Group';
 import TranslateIcon from '@mui/icons-material/Translate';
-import { Metadata } from 'next';
+import PeopleIcon from '@mui/icons-material/People';
 import BackButton from '@/app/components/BackButton/BackButton';
 
-interface Props {
-    params: { id: string }
+interface PageProps {
+    params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const offer = await prisma.offer.findUnique({ where: { id: params.id } });
-    return {
-        title: offer?.title ?? 'Offre introuvable',
-    };
-}
+export default async function OfferDetailsPage({ params }: PageProps) {
+    // Await params before using its properties
+    const { id } = await params;
 
-export default async function OfferDetailsPage({ params }: { params: { id: string } }) {
     const offer = await prisma.offer.findUnique({
-        where: { id: params.id },
-        include: { company: true },
+        where: { id },
+        include: {
+            company: true,
+            applications: {
+                select: {
+                    id: true,
+                    status: true
+                }
+            }
+        },
     });
 
     if (!offer) return notFound();
+
+    // Compter les candidatures par statut
+    const totalApplications = offer.applications.length;
+    const pendingApplications = offer.applications.filter(app => app.status === 'PENDING').length;
+    const acceptedApplications = offer.applications.filter(app => app.status === 'ACCEPTED').length;
+    const refusedApplications = offer.applications.filter(app => app.status === 'REFUSED').length;
 
     return (
         <Box sx={{ maxWidth: 700, mx: 'auto', mt: 4, p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -35,29 +44,35 @@ export default async function OfferDetailsPage({ params }: { params: { id: strin
                 {offer.title}
             </Typography>
 
-            <Divider sx={{ my: 2, borderColor: "#3A3A3A", width: "100%" }} />
+            {/* Affichage du nombre de candidatures */}
+            <Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+                <Chip
+                    icon={<PeopleIcon />}
+                    label={`${totalApplications} candidature${totalApplications > 1 ? 's' : ''}`}
+                    color="primary"
+                    sx={{ backgroundColor: "secondary.main", p:1 }}
+                />
+            </Box>
 
+            <Divider sx={{ my: 2, borderColor: "#3A3A3A", width: "100%" }} />
             <Stack spacing={3} mb={2}>
                 <InfoLine icon={<RoomIcon />} label="Localisation" text={offer.country} />
                 <InfoLine icon={<AccessTimeIcon />} label="Durée" text={offer.duration} />
                 <InfoLine icon={<GroupIcon />} label="Personnes" text={`${offer.people}`} />
                 <InfoLine icon={<TranslateIcon />} label="Langue" text={offer.language} />
                 <InfoLine icon={null} label="Secteur" text={offer.sector} />
+                <InfoLine icon={<PeopleIcon />} label="Candidatures" text={`${totalApplications} reçue${totalApplications > 1 ? 's' : ''}`} />
             </Stack>
-
             <Divider sx={{ my: 2, borderColor: "#3A3A3A", width: "100%" }} />
-
             <Typography variant="body1" mb={4}>
                 {offer.description}
             </Typography>
-
             <Button
-                variant="contained"
                 color="primary"
-                sx={{ borderRadius: 2, px: 4 }}
-                href={`/offers/${params.id}/apply`}
+                href={`/offers/${id}/apply`}
+                sx={{ width: "231px" }}
             >
-                Postuler à cette offre
+                Postuler
             </Button>
         </Box>
     );

@@ -7,7 +7,7 @@ const BackToTopArrow = () => {
     return (
         <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}>
             <IconButton sx={{
-                backgroundColor: "primary.main",
+                backgroundColor: "secondary.light",
                 width: "60px",
                 height: "60px",
                 p: 2,
