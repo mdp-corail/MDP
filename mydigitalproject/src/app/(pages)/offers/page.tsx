@@ -5,6 +5,7 @@ import { Box, CircularProgress, Alert } from '@mui/material';
 import OfferCards from '@/app/components/OfferCards/OfferCards';
 import { Offer } from '@prisma/client';
 import OffersFilters from '@/app/components/OffersFilters/OffersFilters';
+import BackButton from '@/app/components/BackButton/BackButton';
 
 
 export default function OffersPage() {
@@ -35,6 +36,7 @@ export default function OffersPage() {
 
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4, justifyContent: 'center', py: 4 }}>
+            <BackButton />
             <OffersFilters />
             {offers.map((offer) => (
                 <OfferCards 

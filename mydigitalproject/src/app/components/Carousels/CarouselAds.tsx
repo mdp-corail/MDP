@@ -12,9 +12,9 @@ type AdCard = {
 };
 
 const adsCardsData: AdCard[] = [
-    { id: 1, title: 'International', image: '/images/ads1.png', link: '/offers/international' },
+    { id: 1, title: 'International', image: '/images/ads1.png', link: '/offers' },
     { id: 2, title: 'Événements', image: '/images/ads2.png', link: '/events' },
-    { id: 3, title: 'Long terme', image: '/images/ads3.png', link: '/offers/long-term' },
+    { id: 3, title: 'Long terme', image: '/images/ads3.png', link: '/offers' },
 ];
 
 const FeatureCard = ({ title, image, link }: { title: string; image: string, link: string }) => (

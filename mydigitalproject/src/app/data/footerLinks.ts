@@ -3,8 +3,8 @@
 export const informations = [
     { title: "À propos de nous", url: "/about" },
     { title: "Nos services", url: "/services" },
-    { title: "Nos offres", url: "/offers" },
-    { title: "Annonces", url: "/announces" },
+    { title: "Nos offres", url: "/plans" },
+    { title: "Annonces", url: "/offers" },
 ];
 
 export const usefulLinks = [

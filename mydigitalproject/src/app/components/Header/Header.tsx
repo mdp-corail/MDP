@@ -33,8 +33,8 @@ import SearchModal from '../SearchModal/SearchModal';
 
 const navLinks = [
     { label: 'Accueil', href: '/' },
-    { label: 'Nos Offres', href: '/offers' },
-    { label: 'Annonces', href: '/announces' },
+    { label: 'Nos Offres', href: '/plans' },
+    { label: 'Annonces', href: '/offers' },
     { label: 'À propos', href: '/about' },
     { label: 'Accessibilité', href: '/accessibility' },
 ];

@@ -28,7 +28,7 @@ const ContactBlock = () => {
                         }}
                     >
                         <Typography variant="h3" sx={{ color: "primary.main" }}>
-                            Contactez-nous !
+                            Contactez-nous
                         </Typography>
                         <IconButton
                             className="icon-button"
