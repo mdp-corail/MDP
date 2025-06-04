@@ -43,6 +43,7 @@ const Header = () => {
     const isMobile = useMediaQuery('(max-width: 780px)');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [registerAnchorEl, setRegisterAnchorEl] = useState<null | HTMLElement>(null);
+    const [userAnchorEl, setUserAnchorEl] = useState<null | HTMLElement>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
     const [searchOpen, setSearchOpen] = useState(false);
@@ -56,6 +57,10 @@ const Header = () => {
 
     const handleMenuClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleUserMenuClose = () => {
+        setUserAnchorEl(null);
     };
 
     const handleRegisterMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -127,14 +132,38 @@ const Header = () => {
                                 >
                                     <SearchIcon sx={{ fontSize: '25px !important', color: "primary.main" }} />
                                 </IconButton>
-                                <Button variant="outline" href={isLoggedIn ? "/profile" : "/signin"}>
-                                    {isLoggedIn ?
-                                        <Stack direction={'row'} gap={0.5} sx={{ alignItems: 'center' }}>
-                                            <PersonIcon sx={{ fontSize: '20px !important' }} /> {session?.user?.name}
-                                        </Stack>
-                                        : 'Connexion'
-                                    }
-                                </Button>
+                                {isLoggedIn ? (
+                                    <>
+                                        <Button
+                                            variant="outline"
+                                            onClick={(e) => setUserAnchorEl(e.currentTarget)}
+                                        >
+                                            <Stack direction="row" gap={0.5} sx={{ alignItems: 'center' }}>
+                                                <PersonIcon sx={{ fontSize: '20px !important' }} />
+                                                {session?.user?.name}
+                                                <ArrowDropDownIcon />
+                                            </Stack>
+                                        </Button>
+                                        <Menu
+                                            disableScrollLock
+                                            anchorEl={userAnchorEl}
+                                            open={Boolean(userAnchorEl)}
+                                            onClose={handleUserMenuClose}
+                                        >
+                                            <MenuItem onClick={handleUserMenuClose}>
+                                                <Link href="/profile">Profil</Link>
+                                            </MenuItem>
+                                            {session?.user?.type === 'COMPANY' && (
+                                                <MenuItem onClick={handleUserMenuClose}>
+                                                    <Link href="/offers/create">Créer une annonce</Link>
+                                                </MenuItem>
+                                            )}
+                                        </Menu>
+                                    </>
+                                ) : (
+                                    <Button variant="outline" href="/signin">Connexion</Button>
+                                )}
+
                                 {isLoggedIn ?
                                     <Button variant="danger" onClick={() => signOut()}>Déconnexion
                                     </Button>
@@ -280,14 +309,39 @@ const Header = () => {
                                 </ListItem>
                             ))}
                         </List>
-                        <Button variant="outlineAlt" href={isLoggedIn ? "/profile" : "/signin"} onClick={() => setDrawerOpen(false)} sx={{ mt: 4, width: "185px" }}>
-                            {isLoggedIn ?
-                                <Stack direction={'row'} gap={0.5} sx={{ alignItems: 'center' }}>
-                                    <PersonIcon sx={{ fontSize: '20px !important', color: "#F9F9F9" }} /> {session?.user?.name}
-                                </Stack>
-                                : 'Connexion'
-                            }
-                        </Button>
+                        {isLoggedIn ? (
+                            <>
+                                <Button
+                                    variant="alt"
+                                    onClick={(e) => setUserAnchorEl(e.currentTarget)}
+                                    sx={{ width: "185px", mt: 4 }}
+                                >
+                                    <Stack direction="row" gap={0.5} sx={{ alignItems: 'center' }}>
+                                        <PersonIcon sx={{ fontSize: '20px !important' }} />
+                                        {session?.user?.name}
+                                        <ArrowDropDownIcon />
+                                    </Stack>
+                                </Button>
+                                <Menu
+                                    disableScrollLock
+                                    anchorEl={userAnchorEl}
+                                    open={Boolean(userAnchorEl)}
+                                    onClose={handleUserMenuClose}
+                                >
+                                    <MenuItem onClick={handleUserMenuClose}>
+                                        <Link href="/profile">Profil</Link>
+                                    </MenuItem>
+                                    {session?.user?.type === 'COMPANY' && (
+                                        <MenuItem onClick={handleUserMenuClose}>
+                                            <Link href="/offers/create">+ Créer une annonce</Link>
+                                        </MenuItem>
+                                    )}
+                                </Menu>
+                            </>
+                        ) : (
+                            <Button variant="alt" href="/signin" sx={{ mt: 4, width: "185px" }}>Connexion</Button>
+                        )}
+
                         {isLoggedIn ?
                             <Button variant="danger" onClick={() => signOut()} sx={{ mt: 4, width: "185px" }}>Déconnexion
                             </Button>

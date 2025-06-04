@@ -10,7 +10,7 @@ export default function RegisterSuccess() {
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            router.push('/profile/worker');
+            router.push('/');
         }, 3000);
 
         return () => clearTimeout(timeout);
