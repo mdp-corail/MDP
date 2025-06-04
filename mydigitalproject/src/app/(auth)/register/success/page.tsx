@@ -10,7 +10,7 @@ export default function RegisterSuccess() {
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            router.push('/');
+            router.push('/signin');
         }, 3000);
 
         return () => clearTimeout(timeout);
@@ -21,7 +21,7 @@ export default function RegisterSuccess() {
             <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
                 Compte créé avec succès !
             </Typography>
-            <Typography>Redirection vers votre page de profil</Typography>
+            <Typography>Redirection vers la page de connexion</Typography>
             <CircularProgress color="primary" />
         </Box>
     );

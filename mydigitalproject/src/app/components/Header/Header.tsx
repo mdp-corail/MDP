@@ -314,7 +314,7 @@ const Header = () => {
                                 <Button
                                     variant="alt"
                                     onClick={(e) => setUserAnchorEl(e.currentTarget)}
-                                    sx={{ width: "185px", mt: 4 }}
+                                    sx={{ width: "185px", mt: 2 }}
                                 >
                                     <Stack direction="row" gap={0.5} sx={{ alignItems: 'center' }}>
                                         <PersonIcon sx={{ fontSize: '20px !important' }} />
@@ -328,18 +328,18 @@ const Header = () => {
                                     open={Boolean(userAnchorEl)}
                                     onClose={handleUserMenuClose}
                                 >
-                                    <MenuItem onClick={handleUserMenuClose}>
+                                    <MenuItem onClick={handleMenuClose}>
                                         <Link href="/profile">Profil</Link>
                                     </MenuItem>
                                     {session?.user?.type === 'COMPANY' && (
-                                        <MenuItem onClick={handleUserMenuClose}>
+                                        <MenuItem onClick={handleMenuClose}>
                                             <Link href="/offers/create">+ Créer une annonce</Link>
                                         </MenuItem>
                                     )}
                                 </Menu>
                             </>
                         ) : (
-                            <Button variant="alt" href="/signin" sx={{ mt: 4, width: "185px" }}>Connexion</Button>
+                            <Button variant="alt" href="/signin" sx={{ mt: 2, width: "185px" }}>Connexion</Button>
                         )}
 
                         {isLoggedIn ?

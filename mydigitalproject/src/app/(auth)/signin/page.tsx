@@ -44,7 +44,14 @@ export default function SignIn() {
 
 
     useEffect(() => {
-        getProviders().then(setProviders);
+        getProviders().then((providers) => {
+            if (providers) {
+                const filteredProviders = Object.fromEntries(
+                    Object.entries(providers).filter(([key]) => key !== 'credentials')
+                );
+                setProviders(filteredProviders);
+            }
+        });
     }, [error]);
 
     return (
