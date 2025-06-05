@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 
 import { Box, Typography } from '@mui/material'
 import React from 'react'

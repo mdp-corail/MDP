@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 
 'use client';
 
@@ -7,7 +6,7 @@ import DummyPlansDetails from '@/app/components/DummyCards/DummyPlansDetails';
 import { Box, Typography, useMediaQuery } from '@mui/material'
 import React from 'react'
 
-const page = () => {
+const PlansPage = () => {
     const isMobile = useMediaQuery("(max-width: 1600px)");
     return (
         <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
@@ -24,4 +23,4 @@ const page = () => {
     )
 }
 
-export default page
+export default PlansPage;

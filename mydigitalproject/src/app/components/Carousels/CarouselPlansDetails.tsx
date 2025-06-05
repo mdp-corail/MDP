@@ -1,7 +1,7 @@
 'use client';
 
 import Slider from 'react-slick';
-import { Card, CardContent, Stack, Typography, Box } from '@mui/material';
+import { Stack, Box } from '@mui/material';
 
 const cardsData = [
     {
