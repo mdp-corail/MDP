@@ -211,9 +211,9 @@ const Header = () => {
                                 >
                                     <Stack direction={'row'} gap={1}>
                                         <img src={selectedLanguage.icon} alt={`${selectedLanguage.label} flag`} width={24} height={24} style={{ borderRadius: '50%' }} />
-                                        <Typography sx={{ display: 'flex', alignItems: 'center', color: "primary.main" }}>
+                                        <Typography sx={{ display: 'flex', alignItems: 'center', color: "primary.light" }}>
                                             {selectedLanguage.value.toUpperCase()}
-                                            <ArrowDropDownIcon sx={{ fontSize: '25px !important' }} />
+                                            <ArrowDropDownIcon sx={{ fontSize: '25px !important', color: "primary.light" }} />
                                         </Typography>
                                     </Stack>
                                 </IconButton>
