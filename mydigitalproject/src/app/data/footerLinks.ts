@@ -9,7 +9,7 @@ export const informations = [
 
 export const usefulLinks = [
     { title: "Support", url: "/support" },
-    { title: "Conditions générales", url: "/conditions" },
+    { title: "Conditions générales", url: "/cgv" },
     { title: "Politique de confidentialité", url: "/privacy" },
 ];
 

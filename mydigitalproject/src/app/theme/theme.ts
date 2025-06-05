@@ -141,7 +141,6 @@ const theme = createTheme({
                         height: '51px',
                         color: '#086AA6',
                         fontWeight: 'bold',
-                        fontStyle: 'italic',
                         '& fieldset': {
                             borderColor: '#3A3A3A',
                             border: "2px solid #3A3A3A",
@@ -158,7 +157,6 @@ const theme = createTheme({
                         fontFamily: 'var(--font-montserrat-alt)',
                         fontSize: '25px',
                         opacity: 1,
-                        fontStyle: 'italic',
                         fontWeight: 'regular',
                     },
                 },

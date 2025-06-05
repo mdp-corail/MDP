@@ -1,10 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 
-
 "use client";
 
 import { Box, Button, IconButton, List, ListItem, Stack, TextField, Typography, useMediaQuery } from '@mui/material'
-import FacebookIcon from '@mui/icons-material/Facebook';
+import { FaTiktok } from "react-icons/fa";
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -29,12 +28,12 @@ const Footer = () => {
                     </Typography>
                     <Stack direction="row" gap={3} sx={{ mt: 2 }}>
                         <IconButton onClick={() => window.open("https://www.tiktok.com/@meetwork?is_from_webapp=1&sender_device=pc", "_blank")} disableRipple disableFocusRipple disableTouchRipple sx={{ p: 0 }}>
-                            <FacebookIcon sx={{ color: "white", fontSize: "45px" }} />
+                            <FaTiktok style={{ color: "white", fontSize: "35px" }} />
                         </IconButton>
-                        <IconButton onClick={() => window.open("https://www.instagram.com/_meetwork_/", "_blank")} disableRipple disableFocusRipple disableTouchRipple sx={{ p: 0 }}>
+                        <IconButton onClick={() => window.open("https://www.linkedin.com/company/meetwork2025/", "_blank")} disableRipple disableFocusRipple disableTouchRipple sx={{ p: 0 }}>
                             <LinkedInIcon sx={{ color: "white", fontSize: "45px" }} />
                         </IconButton>
-                        <IconButton disableRipple disableFocusRipple disableTouchRipple sx={{ p: 0 }}>
+                        <IconButton disableRipple disableFocusRipple disableTouchRipple onClick={() => window.open("https://www.instagram.com/_meetwork_/", "_blank")} sx={{ p: 0 }}>
                             <InstagramIcon sx={{ color: "white", fontSize: "45px" }} />
                         </IconButton>
                     </Stack>
