@@ -111,6 +111,7 @@ export default function RegisterCompany() {
             setError('Erreur serveur. Veuillez réessayer.');
         } finally {
             setLoading(false);
+            console.log(success);
         }
     };
 
@@ -235,12 +236,6 @@ export default function RegisterCompany() {
             <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')}>
                 <Alert severity="error" onClose={() => setError('')}>
                     {error}
-                </Alert>
-            </Snackbar>
-
-            <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(false)}>
-                <Alert severity="success" onClose={() => setSuccess(false)}>
-                    Compte entreprise créé avec succès !
                 </Alert>
             </Snackbar>
         </Box>

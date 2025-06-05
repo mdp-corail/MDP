@@ -106,6 +106,7 @@ export default function Register() {
             setError('Erreur serveur. Veuillez réessayer.');
         } finally {
             setLoading(false);
+            console.log(success);
         }
     };
 
@@ -169,12 +170,6 @@ export default function Register() {
             <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')}>
                 <Alert severity="error" onClose={() => setError('')}>
                     {error}
-                </Alert>
-            </Snackbar>
-
-            <Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(false)}>
-                <Alert severity="success" onClose={() => setSuccess(false)}>
-                    Compte créé avec succès !
                 </Alert>
             </Snackbar>
         </Box>
