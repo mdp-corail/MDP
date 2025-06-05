@@ -62,9 +62,9 @@ const theme = createTheme({
                     props: { variant: "outline" },
                     style: {
                         backgroundColor: "transparent",
-                        color: "#3A3A3A",
+                        color: "#F9F9F9",
                         height: "41px",
-                        border: "2px solid #3A3A3A",
+                        border: "2px solid #F9F9F9",
                         borderRadius: "14px",
                         "&:hover": {
                             border: "2px solid transparent",

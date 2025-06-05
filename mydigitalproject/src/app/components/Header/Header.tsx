@@ -84,7 +84,7 @@ const Header = () => {
                 position="static"
                 color="transparent"
                 elevation={0}
-                sx={{ p: isMobile ? '40px 15px 0px 15px' : '40px 34px 0px 34px' }}
+                sx={{ p: isMobile ? '40px 15px 0px 15px' : '20px 34px 20px 34px', background: !isMobile ? "linear-gradient(180deg, #086AA6 0%, #032940 100%)" : "transparent" }}
             >
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
                     {/* Logo */}
@@ -93,7 +93,7 @@ const Header = () => {
                             src={
                                 isMobile
                                     ? '/images/meetwork-logo-black.png'
-                                    : '/images/meetwork-black.png'
+                                    : '/images/meetwork-white.png'
                             }
                             alt="Logo Meetwork"
                             width={isMobile ? 61 : 250}
@@ -120,7 +120,7 @@ const Header = () => {
                                             component="button"
                                             underline="none"
                                             onClick={() => setAccessibilityOpen(true)}
-                                            sx={{ color: 'text.primary', fontWeight: 500, background: 'none', border: 'none', cursor: 'pointer' }}
+                                            sx={{ color: 'primary.light', fontWeight: 500, background: 'none', border: 'none', cursor: 'pointer' }}
                                         >
                                             {link.label}
                                         </MuiLink>
@@ -130,7 +130,7 @@ const Header = () => {
                                             href={link.href}
                                             component={Link}
                                             underline="none"
-                                            sx={{ color: 'text.primary', fontWeight: 500 }}
+                                            sx={{ color: 'primary.light', fontWeight: 500 }}
                                         >
                                             {link.label}
                                         </MuiLink>
@@ -145,13 +145,14 @@ const Header = () => {
                                     onClick={handleSearchOpen}
                                     sx={{ display: 'flex', alignItems: 'center', pr: 0 }}
                                 >
-                                    <SearchIcon sx={{ fontSize: '25px !important', color: "primary.main" }} />
+                                    <SearchIcon sx={{ fontSize: '25px !important', color: "primary.light" }} />
                                 </IconButton>
                                 {isLoggedIn ? (
                                     <>
                                         <Button
                                             variant="outline"
                                             onClick={(e) => setUserAnchorEl(e.currentTarget)}
+                                            
                                         >
                                             <Stack direction="row" gap={0.5} sx={{ alignItems: 'center' }}>
                                                 <PersonIcon sx={{ fontSize: '20px !important' }} />
