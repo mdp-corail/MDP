@@ -9,7 +9,7 @@ import DummyAdsCards from "./components/DummyCards/DummyAdsCards";
 
 
 export default function Page() {
-  const isMobile = useMediaQuery("(max-width: 780px)");
+  const isMobile = useMediaQuery("(max-width: 1200px)");
   return (
     <Box>
 
@@ -48,7 +48,7 @@ export default function Page() {
             </Stack>
           }
         </Box>
-        <Button disableRipple disableFocusRipple disableTouchRipple sx={{ width: "231px", mt: 4 }}>
+        <Button disableRipple disableFocusRipple disableTouchRipple href="/plans" sx={{ width: "231px", mt: 4 }}>
           VOIR NOS OFFRES
         </Button>
       </Box>

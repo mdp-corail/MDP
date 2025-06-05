@@ -18,7 +18,7 @@ import BackButton from '@/app/components/BackButton/BackButton';
 import PersonIcon from '@mui/icons-material/Person';
 
 export default function Apply() {
-    const isMobile = useMediaQuery('(max-width: 780px)');
+    const isMobile = useMediaQuery('(max-width: 1200px)');
     const router = useRouter();
     const params = useParams();
     const [cvFile, setCvFile] = useState<File | null>(null);

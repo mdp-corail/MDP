@@ -20,7 +20,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { SvgIconProps } from '@mui/material';
 
 export default function Register() {
-    const isMobile = useMediaQuery('(max-width: 780px)');
+    const isMobile = useMediaQuery('(max-width: 1200px)');
     const [providers, setProviders] = useState<Record<LiteralUnion<string, string>, ClientSafeProvider> | null>(null);
     const router = useRouter();
 

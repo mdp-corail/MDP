@@ -12,7 +12,7 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
 
 export default function SignIn() {
-    const isMobile = useMediaQuery("(max-width: 780px)");
+    const isMobile = useMediaQuery("(max-width: 1200px)");
     const [providers, setProviders] = useState<Record<LiteralUnion<string, string>, ClientSafeProvider> | null>(null);
     const [form, setForm] = useState({ email: '', password: '' });
     const [error, setError] = useState('');

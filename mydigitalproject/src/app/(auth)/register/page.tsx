@@ -6,7 +6,7 @@ import EastIcon from '@mui/icons-material/East';
 
 
 export default function RegisterSelection() {
-    const isMobile = useMediaQuery('(max-width: 780px)');
+    const isMobile = useMediaQuery('(max-width: 1200px)');
     const router = useRouter();
     const buttons = [
         { label: 'Un particulier', href: '/register/worker' },

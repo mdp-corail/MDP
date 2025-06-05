@@ -5,7 +5,7 @@ import EastIcon from '@mui/icons-material/East';
 import SouthIcon from '@mui/icons-material/South';
 
 const ContactBlock = () => {
-    const isMobile = useMediaQuery("(max-width: 780px)");
+    const isMobile = useMediaQuery("(max-width: 1200px)");
     return (
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: isMobile ? "center" : "flex-start", borderTop: "1px solid #3A3A3A", p: isMobile ? "40px 30px" : "40px 60px", gap: 2, textAlign: isMobile ? "center" : "left" }}>
             <Stack sx={{ alignItems: isMobile ? "center" : "flex-start"}}>

@@ -6,9 +6,9 @@ import React from 'react'
 const page = () => {
     return (
         <Box>
-            <h1>
+            <Typography variant="h2">
                 Conditions Générales d’Utilisation (CGU)
-            </h1>
+            </Typography>
             <br></br>
             <Typography>
                 Dernière mise à jour : [05/06/2025]

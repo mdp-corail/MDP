@@ -10,7 +10,7 @@ interface SearchModalProps {
 }
 
 const SearchModal = ({ open, onClose }: SearchModalProps) => {
-    const isMobile = useMediaQuery("(max-width: 780px)");
+    const isMobile = useMediaQuery("(max-width: 1200px)");
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleEntered = () => {

@@ -30,17 +30,18 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { languages } from '@/app/data/languages';
 import SearchModal from '../SearchModal/SearchModal';
+import AccessibilityModal from '../Modals/AccessibilityModal';
 
 const navLinks = [
     { label: 'Accueil', href: '/' },
     { label: 'Nos Offres', href: '/plans' },
     { label: 'Annonces', href: '/offers' },
     { label: 'À propos', href: '/about' },
-    { label: 'Accessibilité', href: '/accessibility' },
+    { label: 'Accessibilité', href: '#' },
 ];
 
 const Header = () => {
-    const isMobile = useMediaQuery('(max-width: 780px)');
+    const isMobile = useMediaQuery('(max-width: 1500px)');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [registerAnchorEl, setRegisterAnchorEl] = useState<null | HTMLElement>(null);
     const [userAnchorEl, setUserAnchorEl] = useState<null | HTMLElement>(null);
@@ -49,6 +50,8 @@ const Header = () => {
     const [searchOpen, setSearchOpen] = useState(false);
     const { data: session } = useSession();
     const isLoggedIn = !!session;
+    const [accessibilityOpen, setAccessibilityOpen] = useState(false);
+
 
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -110,17 +113,29 @@ const Header = () => {
                             }}
                         >
                             <Stack direction={'row'} gap={4}>
-                                {navLinks.map((link) => (
-                                    <MuiLink
-                                        key={link.label}
-                                        href={link.href}
-                                        component={Link}
-                                        underline="none"
-                                        sx={{ color: 'text.primary', fontWeight: 500 }}
-                                    >
-                                        {link.label}
-                                    </MuiLink>
-                                ))}
+                                {navLinks.map((link) =>
+                                    link.label === 'Accessibilité' ? (
+                                        <MuiLink
+                                            key={link.label}
+                                            component="button"
+                                            underline="none"
+                                            onClick={() => setAccessibilityOpen(true)}
+                                            sx={{ color: 'text.primary', fontWeight: 500, background: 'none', border: 'none', cursor: 'pointer' }}
+                                        >
+                                            {link.label}
+                                        </MuiLink>
+                                    ) : (
+                                        <MuiLink
+                                            key={link.label}
+                                            href={link.href}
+                                            component={Link}
+                                            underline="none"
+                                            sx={{ color: 'text.primary', fontWeight: 500 }}
+                                        >
+                                            {link.label}
+                                        </MuiLink>
+                                    )
+                                )}
                             </Stack>
                             <Stack direction="row" gap={2} sx={{ alignItems: 'center', ml: 8 }}>
                                 <IconButton
@@ -303,11 +318,24 @@ const Header = () => {
                         <List sx={{ width: "100%", p: 4 }}>
                             {navLinks.map((link) => (
                                 <ListItem key={link.label} disablePadding sx={{ width: "100%" }}>
-                                    <ListItemButton component={Link} href={link.href} onClick={() => setDrawerOpen(false)} sx={{ textAlign: "center", p: 2 }}>
-                                        <ListItemText primary={link.label} />
-                                    </ListItemButton>
+                                    {link.label === 'Accessibilité' ? (
+                                        <ListItemButton
+                                            onClick={() => {
+                                                setAccessibilityOpen(true);
+                                                setDrawerOpen(false);
+                                            }}
+                                            sx={{ textAlign: "center", p: 2 }}
+                                        >
+                                            <ListItemText primary={link.label} />
+                                        </ListItemButton>
+                                    ) : (
+                                        <ListItemButton component={Link} href={link.href} onClick={() => setDrawerOpen(false)} sx={{ textAlign: "center", p: 2 }}>
+                                            <ListItemText primary={link.label} />
+                                        </ListItemButton>
+                                    )}
                                 </ListItem>
                             ))}
+
                         </List>
                         {isLoggedIn ? (
                             <>
@@ -355,6 +383,8 @@ const Header = () => {
 
             {/* Search Modal  */}
             <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
+
+            <AccessibilityModal open={accessibilityOpen} onClose={() => setAccessibilityOpen(false)} />
         </>
     );
 };
