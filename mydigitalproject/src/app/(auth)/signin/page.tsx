@@ -90,7 +90,7 @@ export default function SignIn() {
                         disableRipple
                         disableFocusRipple
                         key={provider.id}
-                        onClick={() => signIn(provider.id)}
+                        onClick={() => signIn(provider.id, { callbackUrl: '/' })}
                         startIcon={providerIcons[provider.id]?.({ sx: { fontSize: '32px !important', mr: 4 } })}
                         sx={{ m: 1, width: "340px" }}
                     >
