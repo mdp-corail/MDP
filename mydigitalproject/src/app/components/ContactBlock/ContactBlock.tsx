@@ -1,7 +1,6 @@
 'use client';
 
 import { Box, IconButton, Stack, Typography, useMediaQuery } from '@mui/material'
-import EastIcon from '@mui/icons-material/East';
 import SouthIcon from '@mui/icons-material/South';
 
 const ContactBlock = () => {
