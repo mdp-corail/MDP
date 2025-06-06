@@ -33,22 +33,19 @@ const ContactBlock = () => {
                         <IconButton
                             className="icon-button"
                             sx={{
-                                left: isMobile ? "50" : "0",
+                                left: "50",
                                 backgroundColor: "primary.main",
-                                width: isMobile ? "80px" : "60px",
-                                height: isMobile ? "80px" : "60px",
+                                width: "80px",
+                                height: "80px",
                                 p: 2,
                                 color: "primary.light",
-                                opacity: isMobile ? 1 : 0,
-                                transform: isMobile ? "translateX(0)" : "translateX(-20px)",
-                                transition: "all 0.2s ease",
                                 '&:hover': {
                                     backgroundColor: "primary.main",
                                 },
                             }}
                         >
 
-                            {isMobile ? <Typography sx={{ fontSize: "22px" }}>GO !</Typography> : <EastIcon />}
+                            <Typography sx={{ fontSize: "22px" }}>GO !</Typography>
                         </IconButton>
                     </Stack>
                 </a>

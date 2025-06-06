@@ -7,7 +7,7 @@ import { Box, Typography, useMediaQuery } from '@mui/material'
 import React from 'react'
 
 const PlansPage = () => {
-    const isMobile = useMediaQuery("(max-width: 1600px)");
+    const isMobile = useMediaQuery("(max-width: 1500px)");
     return (
         <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
             <Typography variant="h3" sx={{ fontWeight: "bold", fontSize: "40px", textAlign: "center" }}>
