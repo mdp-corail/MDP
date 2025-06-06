@@ -2,7 +2,7 @@
 
 'use client';
 
-import { Box, Button, Checkbox, Divider, FormControl, Stack, SvgIconProps, TextField, Typography, useMediaQuery } from '@mui/material';
+import { Alert, Box, Button, Checkbox, Divider, FormControl, Snackbar, Stack, SvgIconProps, TextField, Typography, useMediaQuery } from '@mui/material';
 import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react';
 import { JSX, useEffect, useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -139,6 +139,16 @@ export default function SignIn() {
             <Typography sx={{ mt: 4 }}>
                 Vous n'avez pas de compte ? <a href="/register" style={{ textDecoration: "underline", color: "#086AA6" }}>S'inscrire sur Meetwork !</a>
             </Typography>
+            <Snackbar
+                open={!!error}
+                autoHideDuration={6000}
+                onClose={() => setError('')}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+                <Alert onClose={() => setError('')} severity="error" sx={{ width: '100%' }}>
+                    {error}
+                </Alert>
+            </Snackbar>
         </Box>
     );
 }
