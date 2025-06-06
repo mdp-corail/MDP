@@ -11,6 +11,17 @@ import { CheckBox } from '@mui/icons-material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
 
+/**
+ * Page de connexion
+ *
+ * Affiche un formulaire de connexion avec les providers de connexion (Google, LinkedIn, etc.),
+ * ainsi qu'un formulaire de connexion par email et mot de passe.
+ *
+ * Si l'utilisateur n'a pas de compte, il peut cliquer sur le lien "S'inscrire sur Meetwork !"
+ * pour acc der  la page d'inscription.
+ *
+ * @returns Le composant SignIn
+ */
 export default function SignIn() {
     const isMobile = useMediaQuery("(max-width: 1200px)");
     const [providers, setProviders] = useState<Record<LiteralUnion<string, string>, ClientSafeProvider> | null>(null);
@@ -22,10 +33,26 @@ export default function SignIn() {
         linkedin: (props) => <LinkedInIcon {...props} />,
     };
 
+    /**
+     * Met  jour l' t at du formulaire de connexion en fonction de l' v nement
+     * re u de l' l ment HTML.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} e - L' v nement re u
+     */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
+    /**
+     * Soumet le formulaire de connexion.
+     *
+     * Envoie une requ te de connexion  l'API NextAuth avec les informations de connexion
+     * renseign es dans le formulaire.
+     *
+     * Si la connexion est valide, redirige vers la page d'accueil.
+     *
+     * @returns {Promise<void>}
+     */
     const handleSubmit = async () => {
         setError('');
 

@@ -10,7 +10,7 @@ const page = () => {
             </Typography>
             <br></br>
             <Typography>
-                Dernière mise à jour : [05/06/2025]
+                Dernière mise à jour : 05/06/2025
                 <br></br>
                 Bienvenue sur Meetwork, une plateforme dédiée à la mise en relation entre professionnels et entreprises à travers la publication et la réponse à des offres d’emploi ou de missions.
                 <br></br>
@@ -19,13 +19,13 @@ const page = () => {
                 <br></br>
                 1. Informations légales
                 <br></br>
-                Éditeur du site : [MEETWORK]
+                Éditeur du site : MEETWORK
                 <br></br>
-                Responsable de publication : [Adrien Verwaerde]
+                Responsable de publication : Adrien Verwaerde
                 <br></br>
-                Hébergement : [Railway]
+                Hébergement : Railway
                 <br></br>
-                Contact : [contact@meetwork.pro]
+                Contact : contact@meetwork.pro
                 <br></br>
                 <br></br>
                 2. Objet du service
@@ -94,9 +94,13 @@ const page = () => {
                 9. Résiliation de compte
                 <br></br>
                 L’utilisateur peut à tout moment demander la suppression de son compte. Meetwork se réserve également le droit de suspendre ou supprimer un compte en cas de non-respect des CGU.
+                <br></br>
+                <br></br>
                 10. Modifications des CGU
                 <br></br>
                 Meetwork se réserve le droit de modifier les présentes CGU à tout moment. Les utilisateurs seront informés via le site ou par email.
+                <br></br>
+                <br></br>
                 11. Droit applicable
                 <br></br>
                 Les présentes CGU sont soumises au droit français. En cas de litige, les tribunaux compétents seront ceux du ressort du siège social de Meetwork.

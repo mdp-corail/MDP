@@ -8,6 +8,21 @@ import CarouselAds from "./components/Carousels/CarouselAds";
 import DummyAdsCards from "./components/DummyCards/DummyAdsCards";
 
 
+/**
+ * Page component for the home page
+ *
+ * This component renders the home page, which consists of four blocks:
+ *   - Bloc 1: A hero section with a heading, a paragraph and a button
+ *   - Bloc 2: A section with a heading, a paragraph and a list of plans
+ *   - Bloc 3: A section with a heading, a paragraph and a list of ads
+ *   - Bloc 4: A section with a heading, a paragraph and a list of ads
+ *
+ * The layout of the blocks is different depending on the screen size.
+ * On small screens, the blocks are displayed in a column, while on larger
+ * screens, they are displayed in a row.
+ *
+ * @returns The JSX for the home page
+ */
 export default function Page() {
   const isMobile = useMediaQuery("(max-width: 1200px)");
   return (
